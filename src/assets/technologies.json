@@ -1,0 +1,442 @@
+{
+  "nodes": [
+    { id:"Swordsmanship", group:"1", name:"Swordsmanship", text:`<b>Swordsmanship
++2 strength
+---
+Sword
+Dagger
+Shield
+Scabbard
+Point
+Edge
+Pommel
+Hilt
+Guard`, rank:2, root:false },
+    { id:"Nationalism", group:"1", name:"Nationalism", text:`<b>Nationalism
++4 social
+---
+Nation
+Leader
+Rituals
+Soldiers`, rank:4, root:false },
+    { id:"Taming", group:"1", name:"Taming", text:`<b>Taming
++1 food
+---
+Wheat
+Barley
+Sorghum
+Dog
+Cat
+Cow
+Camel
+Horse
+Llama
+Goat
+Sheep`, rank:1, root:false },
+    { id:"Monotheism", group:"1", name:"Monotheism", text:`<b>Monotheism
++3 social
+---
+God
+Saints
+Marturs
+Rituals
+Cults
+Temple
+Clergy
+Missionaries`, rank:3, root:false },
+    { id:"Jewelry", group:"1", name:"Jewelry", text:`<b>Jewelry
++3 social
+---
+Rings
+Collars`, rank:2, root:false },
+    { id:"Porcelain", group:"1", name:"Porcelain", text:`<b>Porcelain
++4 food
+---
+Jugs
+Bottles
+Plates`, rank:4, root:false },
+    { id:"Weapons", group:"1", name:"Weapons", text:`<b>Weapons
++1 strength
+---
+Club
+Stones
+Javelin
+Spear
+Knife
+Sword
+Bow
+Arrows`, rank:1, root:false },
+    { id:"Polytheism", group:"1", name:"Polytheism", text:`<b>Polytheism
++2 social
+---
+Gods
+Spirits
+Rituals
+Cults
+Temple
+Clergy`, rank:2, root:false },
+    { id:"Cattle", group:"1", name:"Cattle", text:`<b>Cattle
++2 food
+---
+Cow
+Camel
+Horse
+Goat
+Sheep
+Llama`, rank:3, root:false },
+    { id:"Animism", group:"1", name:"Animism", text:`<b>Animism
++1 tech +1 social
+---
+Shaman
+Spirits
+Rituals`, rank:0, root:true },
+    { id:"Coal", group:"1", name:"Coal", text:`<b>Coal
++3 prod
+---`, rank:1, root:false },
+    { id:"Archery", group:"1", name:"Archery", text:`<b>Archery
++2 strength
+---
+Bow
+Arrows`, rank:2, root:false },
+    { id:"Ornaments", group:"1", name:"Ornaments", text:`<b>Ornaments
++2 social
+---
+Copper
+Flowers
+Gold
+Bones
+Wood`, rank:1, root:false },
+    { id:"Stonecraft", group:"1", name:"Stonecraft", text:`<b>Stonecraft
++1 prod
+---
+Flint
+Limestone
+Granite`, rank:3, root:false },
+    { id:"Theocracy", group:"1", name:"Theocracy", text:`<b>Theocracy
++4 social +1 strength
+---
+Priest
+Clergy
+Inquisition`, rank:4, root:false },
+    { id:"Chariot", group:"1", name:"Chariot", text:`<b>Chariot
++3 strength
+---
+Horse
+Bow
+Spear`, rank:2, root:false },
+    { id:"Cavalry", group:"1", name:"Cavalry", text:`<b>Chariot
++4 strength
+---
+Horse
+Sword
+Spear
+Shield`, rank:3, root:false },
+    { id:"Chiefdom", group:"1", name:"Chiefdom", text:`<b>Chiefdom
++3 social
+---
+Chief
+King
+Family
+Warriors`, rank:2, root:false },
+    { id:"Bronze", group:"1", name:"Bronze", text:`<b>Bronze
++2 prod
+---
+Arsenical Bronze
+Furnace`, rank:3, root:false },
+    { id:"Construction", group:"1", name:"Construction", text:`<b>Construction
++1 social
+---
+Porch
+Beams
+Hut
+House`, rank:2, root:false },
+    { id:"Army", group:"1", name:"Army", text:`<b>Army
++2 strength
+---
+Chief
+Leader
+Soldiers`, rank:2, root:false },
+    { id:"Cultivation", group:"1", name:"Cultivation", text:`<b>Cultivation
++2 food
+---
+Wheat
+Barley
+Sorghum`, rank:3, root:false },
+    { id:"Architecture", group:"1", name:"Architecture", text:`<b>Architecture
++2 social
+---
+Porch
+Beams
+Hut
+House`, rank:4, root:false },
+    { id:"Village", group:"1", name:"Village", text:`<b>Village
++2 social
+---
+Strongman
+Kinship
+Family
+Chief
+Warriors`, rank:1, root:false },
+    { id:"Domestication", group:"1", name:"Domestication", text:`<b>Domestication
++1 food
+---
+Wheat
+Barley
+Sorghum
+Dog
+Cow
+Camel
+Horse
+Llama
+Goat
+Sheep`, rank:2, root:false },
+    { id:"City", group:"1", name:"City", text:`<b>City
++3 social
+---
+Forum
+Template
+Granary
+Citizens
+Family
+Laws`, rank:2, root:false },
+    { id:"Oil", group:"1", name:"Oil", text:`<b>Oil
++4 prod
+---`, rank:2, root:false },
+    { id:"Monarchy", group:"1", name:"Monarchy", text:`<b>Monarchy
++4 social
+---
+King
+Minister
+Lineage
+Laws
+Soldiers`, rank:3, root:false },
+    { id:"Democracy", group:"1", name:"Democracy", text:`<b>Democracy
++4 social
+---
+Forum
+Template
+Granary
+Citizens
+Laws
+Parliament`, rank:4, root:false },
+    { id:"Gathering", group:"1", name:"Gathering", text:`<b>Gathering
++1 prod +1 food +1 tech
+---
+Wheat
+Barley
+Sorghum
+Stones
+Copper
+Gold`, rank:0, root:true },
+    { id:"Irrigation", group:"1", name:"Irrigation", text:`<b>Irrigation
++3 food
+---
+Wheat
+Barley
+Sorghum`, rank:4, root:false },
+    { id:"Wheel", group:"1", name:"Wheel", text:`<b>Wheel
++1 prod
+---
+Cart`, rank:0, root:false },
+    { id:"Stoneware", group:"1", name:"Stoneware", text:`<b>Stoneware
++3 food
+---
+Jugs
+Bottles
+Plates`, rank:3, root:false },
+    { id:"Empire", group:"1", name:"Empire", text:`<b>Empire
++5 social
+---
+King
+Empire
+Laws
+Bureaucracy
+Soldiers`, rank:4, root:false },
+    { id:"Iron", group:"1", name:"Iron", text:`<b>Iron
++3 prod
+---
+Furnace`, rank:4, root:false },
+    { id:"Plastic", group:"1", name:"Plastic", text:`<b>Plastic
++7 prod
+---
+Bakelite
+Nylon
+Vinyl`, rank:6, root:false },
+    { id:"Band", group:"1", name:"Band", text:`<b>Band
++1 strength
+---
+Chief
+Warriors`, rank:1, root:false },
+    { id:"Republic", group:"1", name:"Republic", text:`<b>Republic
++4 social
+---
+Forum
+Template
+Granary
+Citizens
+Laws
+Parliament`, rank:3, root:false },
+    { id:"Pantheism", group:"1", name:"Pantheism", text:`<b>Pantheism
++1 social
+---
+Gods
+Spirits
+Rituals`, rank:1, root:false },
+    { id:"Firewood", group:"1", name:"Firewood", text:`<b>Firewood
++1 prod
+---
+Oak
+Birch
+Poplar`, rank:0, root:true },
+    { id:"Armor", group:"1", name:"Armor", text:`<b>Armor
++2 strength
+---
+Helmet
+Cuirasse
+Shield
+Leather
+Plates
+Chainmail`, rank:2, root:false },
+    { id:"Pottery", group:"1", name:"Pottery", text:`<b>Pottery
++1 food
+---
+Clay
+Pots
+Kiln
+Bricks`, rank:1, root:false },
+    { id:"Tribe", group:"1", name:"Tribe", text:`<b>Tribe
++5 social
+---
+Tents
+Strongman
+Lineage
+Kinship
+Warriors`, rank:0, root:true },
+    { id:"Woodworking", group:"1", name:"Woodworking", text:`<b>Woodworking
++1 prod
+---
+Cedar
+Oak
+Birch
+Fir
+Cherry
+Mapple
+Pine
+Chestnut
+Aspen`, rank:1, root:false },
+    { id:"Hunting", group:"1", name:"Hunting", text:`<b>Hunting
++1 prod +1 food +1 strength
+---
+Mammoths
+Aurochs
+Sheep`, rank:0, root:true },
+    { id:"Tools", group:"1", name:"Tools", text:`<b>Tools
++2 prod +1 tech
+---
+Stick
+Hammer`, rank:0, root:true },
+    { id:"Steel", group:"1", name:"Steel", text:`<b>Steel
++4 prod
+---`, rank:5, root:false },
+    { id:"Earthenware", group:"1", name:"Earthenware", text:`<b>Earthenware
++2 food
+---
+Jugs
+Bottles
+Plates`, rank:2, root:false },
+    { id:"Music", group:"1", name:"Music", text:`<b>Music
++2 social
+---
+Song
+Percussion`, rank:0, root:false },
+    { id:"Clothes", group:"1", name:"Clothes", text:`<b>Clothes
++1 social +1 strength
+---
+Cape
+Sewing
+Leather
+Flax
+Silk`, rank:0, root:false },
+    { id:"Metallurgy", group:"1", name:"Metallurgy", text:`<b>Metallurgy
++2 prod
+---
+Copper
+Gold
+Silver
+Tin
+Iron
+Lead
+Furnace`, rank:2, root:false },
+  ],
+  "links": [
+    { source:"Weapons", target:"Swordsmanship", strong:true },
+    { source:"Monotheism", target:"Nationalism", strong:true },
+    { source:"Gathering", target:"Taming", strong:true },
+    { source:"Polytheism", target:"Monotheism", strong:true },
+    { source:"Ornaments", target:"Jewelry", strong:true },
+    { source:"Stoneware", target:"Porcelain", strong:true },
+    { source:"Hunting", target:"Weapons", strong:true },
+    { source:"Pantheism", target:"Polytheism", strong:true },
+    { source:"Domestication", target:"Cattle", strong:true },
+    { source:"Firewood", target:"Coal", strong:true },
+    { source:"Weapons", target:"Archery", strong:true },
+    { source:"Clothes", target:"Ornaments", strong:true },
+    { source:"Construction", target:"Stonecraft", strong:true },
+    { source:"Monarchy", target:"Theocracy", strong:true },
+    { source:"Weapons", target:"Chariot", strong:true },
+    { source:"Chariot", target:"Cavalry", strong:true },
+    { source:"Village", target:"Chiefdom", strong:true },
+    { source:"Metallurgy", target:"Bronze", strong:true },
+    { source:"Village", target:"Construction", strong:true },
+    { source:"Band", target:"Army", strong:true },
+    { source:"Domestication", target:"Cultivation", strong:true },
+    { source:"Stonecraft", target:"Architecture", strong:true },
+    { source:"Tribe", target:"Village", strong:true },
+    { source:"Taming", target:"Domestication", strong:true },
+    { source:"Village", target:"City", strong:true },
+    { source:"Coal", target:"Oil", strong:true },
+    { source:"Chiefdom", target:"Monarchy", strong:true },
+    { source:"Republic", target:"Democracy", strong:true },
+    { source:"Cultivation", target:"Irrigation", strong:true },
+    { source:"Earthenware", target:"Stoneware", strong:true },
+    { source:"Monarchy", target:"Empire", strong:true },
+    { source:"Bronze", target:"Iron", strong:true },
+    { source:"Steel", target:"Plastic", strong:true },
+    { source:"Tribe", target:"Band", strong:true },
+    { source:"City", target:"Republic", strong:true },
+    { source:"Animism", target:"Pantheism", strong:true },
+    { source:"Weapons", target:"Armor", strong:true },
+    { source:"Wheel", target:"Pottery", strong:true },
+    { source:"Tools", target:"Woodworking", strong:true },
+    { source:"Iron", target:"Steel", strong:true },
+    { source:"Pottery", target:"Earthenware", strong:true },
+    { source:"Woodworking", target:"Metallurgy", strong:true },
+    
+    { source:"Bronze", target:"Swordsmanship", strong:false },
+    { source:"Iron", target:"Swordsmanship", strong:false },
+    { source:"Metallurgy", target:"Jewelry", strong:false },
+    { source:"Coal", target:"Porcelain", strong:false },
+    { source:"Woodworking", target:"Archery", strong:false },
+    { source:"Monotheism", target:"Theocracy", strong:false },
+    { source:"Cattle", target:"Chariot", strong:false },
+    { source:"Wheel", target:"Chariot", strong:false },
+    { source:"Woodworking", target:"Bronze", strong:false },
+    { source:"City", target:"Army", strong:false },
+    { source:"Architecture", target:"City", strong:false },
+    { source:"Monotheism", target:"Monarchy", strong:false },
+    { source:"Cattle", target:"Irrigation", strong:false },
+    { source:"Tools", target:"Wheel", strong:false },
+    { source:"Oil", target:"Plastic", strong:false },
+    { source:"Weapons", target:"Band", strong:false },
+    { source:"Bronze", target:"Armor", strong:false },
+    { source:"Iron", target:"Armor", strong:false },
+    { source:"Clothes", target:"Armor", strong:false },
+    { source:"Firewood", target:"Pottery", strong:false },
+    { source:"Cultivation", target:"Pottery", strong:false },
+    { source:"Coal", target:"Steel", strong:false },
+    { source:"Tribe", target:"Music", strong:false },
+    { source:"Gathering", target:"Clothes", strong:false },
+    { source:"Hunting", target:"Clothes", strong:false },
+    { source:"Cultivation", target:"Clothes", strong:false },
+  ],
+}
