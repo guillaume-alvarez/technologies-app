@@ -1,19 +1,19 @@
 package com.galvarez.technologies;
 
 import java.io.BufferedReader;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,52 +21,67 @@ public class JsonWriter {
 
     private static final Logger log = LoggerFactory.getLogger(JsonWriter.class);
 
-    private static VelocityEngine createEngine() {
-        Properties properties = new Properties();
-        properties.setProperty("resource.loaders", "class");
-        properties.setProperty("resource.loader.class.class",
-                "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-        properties.setProperty("resource.default_encoding", "UTF-8");
-        properties.setProperty("output.encoding", "UTF-8");
-        properties.setProperty("runtime.strict_mode.enable", "true");
-        return new VelocityEngine(properties);
+    public final class TechnologySerializer extends StdSerializer<Technology> {
+        
+        private static final long serialVersionUID = 1L;
+
+        public TechnologySerializer() {
+            this(Technology.class);
+        }
+       
+        public TechnologySerializer(Class<Technology> t) {
+            super(t);
+        }
+
+        @Override
+        public void serialize(Technology tech, JsonGenerator jgen, SerializerProvider provider) 
+          throws IOException {
+            jgen.writeStartObject();
+            jgen.writeStringField("id", tech.getId());
+            jgen.writeStringField("name", tech.getName());
+            jgen.writeNumberField("rank", tech.getRank());
+            jgen.writeBooleanField("root",tech.isRoot());
+            jgen.writeStringField("text", tech.getText());
+
+            jgen.writeArrayFieldStart("previous");
+            for(Technology t : tech.getPrevious())
+                jgen.writeString(t.getId());
+            jgen.writeEndArray();
+
+            jgen.writeArrayFieldStart("help");
+            for(Technology t : tech.getHelp())
+                jgen.writeString(t.getId());
+            jgen.writeEndArray();
+            
+            jgen.writeEndObject();
+        }
     }
 
-    private final VelocityEngine engine;
+
+    private final ObjectMapper mapper; 
 
     JsonWriter() {
-        engine = createEngine();
+        mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Technology.class, new TechnologySerializer());
+        mapper.registerModule(module);
     }
 
-    private String render(Map<String, Object> model, String templateName) {
-        Template template = engine.getTemplate("com/galvarez/technologies/" + templateName, "UTF-8");
-        VelocityContext context = new VelocityContext(model);
-        StringWriter writer = new StringWriter();
-        template.merge(context, writer);
-        log.debug("Render:\n{}", writer.toString());
-        return writer.toString();
-    }
-
-    private String renderGraph() throws IOException {
-        Map<String, Object> data = new HashMap<>();
-        try (Reader r = new InputStreamReader(
-                Application.class.getResourceAsStream("/com/galvarez/technologies/technologies.plantuml"))) {
-            data.put("technologies", new PlantumlParser().parse(new BufferedReader(r)));
+    private Map<String, Technology> parseGraph() throws IOException {
+        try (Reader r = new InputStreamReader(Application.class.getResourceAsStream("/com/galvarez/technologies/technologies.plantuml"))) {
+            return new PlantumlParser().parse(new BufferedReader(r));
         }
-        return render(data, "technologies.vm");
     }
 
     public static void main(String... args) throws Exception {
         String out = args[0];
 
         JsonWriter writer = new JsonWriter();
-        String json = writer.renderGraph();
+        Map<String, Technology> technologies = writer.parseGraph();
 
-        log.info("Write to {}:\n{}", out, json);
-
-        try (Writer file = new FileWriter(out)) {
-            file.write(json);
-            file.flush();
-        }
+        log.info("Write to {}:\n{}", out, technologies);
+        writer.mapper.writeValue(new File(out), technologies);
     }
 }
