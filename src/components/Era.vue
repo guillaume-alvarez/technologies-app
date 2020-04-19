@@ -2,7 +2,7 @@
   <div class="era">
     <section class="section">
         <h1 class="title">{{ name }}</h1>
-        <div class="columns">
+        <div class="columns is-multiline">
           <div class="column is-narrow" v-for="tech in techs" v-bind:key="tech.id">
             <div @click="$emit('select-tech', tech)">
               <TechCard :tech="tech"/>
@@ -32,5 +32,8 @@ export default class Era extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.era {
+  background-image: url("../assets/big-marble-texture.png");
+}
 
 </style>

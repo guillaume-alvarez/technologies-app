@@ -31,8 +31,9 @@ export default class TechCard extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.tech {
+.card {
   width: 200px;
+  background-image: url("../assets/parch-texture.png");
 }
 
 .tech-text {
