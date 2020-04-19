@@ -2,28 +2,46 @@ package com.galvarez.technologies;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Technology {
 
-    private final String name;
+    private final String id;
+    private String name;
     private final StringBuilder text = new StringBuilder();
+
+    private final Map<String, Integer> effects = new HashMap<>();
 
     private final List<Technology> previous = new ArrayList<>();
     private final List<Technology> help = new ArrayList<>();
 
     private int rank = -1;
 
-    Technology(String name) {
-        this.name = name;
+    Technology(String id) {
+        this.id = id;
     }
 
-    public String getId(){
-        return name;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<String, Integer> getEffects() {
+        return effects;
+    }
+
+    void addEffect(String effect, int value) {
+        effects.put(effect, value);
     }
 
     public String getText() {
@@ -53,7 +71,8 @@ public class Technology {
     }
 
     /**
-     * Return the card rank: 0 for the first ones without any previous, then 1 for the next, etc.
+     * Return the card rank: 0 for the first ones without any previous, then 1 for
+     * the next, etc.
      */
     public int getRank() {
         if (rank < 0) {
@@ -73,6 +92,9 @@ public class Technology {
 
     @Override
     public String toString() {
-        return name;
+        return id + '[' + name + ' ' + effects //
+                + " previous=" + previous.stream().map(Technology::getName).collect(Collectors.joining(",")) //
+                + " help=" + help.stream().map(Technology::getName).collect(Collectors.joining(",")) //
+                + ']';
     }
 }

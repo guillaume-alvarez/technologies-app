@@ -32,8 +32,5 @@ export default class Era extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.era {
-  background-image: url("../assets/big-marble-texture.png");
-}
 
 </style>

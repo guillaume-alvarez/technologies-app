@@ -5,6 +5,14 @@
         <p class="card-header-title">
           {{ tech.name }}
         </p>
+        <div class="card-header-icon">
+          <span v-for="(value, name) in tech.effects" :key="name">
+            <figure class="image is-32x32">
+              <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
+            </figure>
+            <p>+{{value }}</p>
+          </span>
+        </div>
       </header>
       <div class="card-content">
         <div class="content tech-text">
@@ -17,7 +25,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Technology } from '../technology';
+import { Technology, Effects } from '../technology';
 
 @Component
 export default class TechCard extends Vue {
@@ -25,6 +33,18 @@ export default class TechCard extends Vue {
 
   get text(): string {
     return this.tech.text;
+  }
+
+  getIconPath = function getIconPath(effect: keyof Effects): string {
+    const icons = require.context('../assets/icons/', false, /\.svg$/);
+    switch (effect) {
+      case 'prod': return icons('./tools.svg');
+      case 'strength': return icons('./swords.svg');
+      case 'food': return icons('./wheat.svg');
+      case 'social': return icons('./village.svg');
+      case 'tech': return icons('./enlightenment.svg');
+      default: return '';
+    }
   }
 }
 </script>
@@ -34,10 +54,27 @@ export default class TechCard extends Vue {
 .card {
   width: 200px;
   background-image: url("../assets/parch-texture.png");
+
+  /* strong shadow */
+  box-shadow: 1em 1em 2em -0.125em rgba(10, 10, 10, 0.5), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+
+  border-radius: 0.5em; /* slightly round corner, like physical cards */
+  border: thin outset black;
+}
+
+.card-header-title {
+  padding: 0.5em;
+}
+.card-header-icon {
+  padding: 0.5em;
+}
+
+.card-content {
+  padding: 0.5em;
 }
 
 .tech-text {
-  white-space: pre-line;
+  white-space: pre-line; /* keep formatting from json */
   text-align: left;
 }
 </style>

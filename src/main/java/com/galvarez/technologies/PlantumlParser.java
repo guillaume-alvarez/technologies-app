@@ -2,15 +2,19 @@ package com.galvarez.technologies;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 final class PlantumlParser {
 
+    private static final Logger log = LoggerFactory.getLogger(PlantumlParser.class);
 
-    private final Map<String, Technology> technologies = new HashMap<>();
+    private final Map<String, Technology> technologies = new LinkedHashMap<>();
 
     private Technology current = null;
 
@@ -21,11 +25,18 @@ final class PlantumlParser {
         for (String line = reader.readLine(); line != null; line = reader.readLine()) {
             line = line.trim();
             if (current == null) {
-                if (!parseNodeStart(line)) {
+                if (parseNodeStart(line)) {
+                    log.info("Start {}", current.getId());
+                } else {
                     parseLink(line);
                 }
             } else {
-                parseNodeContent(line);
+                if (current.getName() == null)
+                    parseNodeName(line);
+                if (current.getEffects().isEmpty())
+                    parseNodeEffects(line);
+                else
+                    parseNodeContent(line);
             }
         }
         return technologies;
@@ -42,15 +53,36 @@ final class PlantumlParser {
         return false;
     }
 
+    private static final Pattern NODE_NAME = Pattern.compile("<b>\\s*(\\w+)\\s*");
+
+    private boolean parseNodeName(String line) {
+        Matcher matcher = NODE_NAME.matcher(line);
+        if (matcher.matches()) {
+            current.setName(matcher.group(1));
+            return true;
+        }
+        return false;
+    }
+
+    private static final Pattern NODE_EFFECTS = Pattern.compile("\\s*([+]\\d+)\\s+(\\w+)\\s*");
+
+    private boolean parseNodeEffects(String line) {
+        Matcher matcher = NODE_EFFECTS.matcher(line);
+        while (matcher.find()) {
+            current.addEffect(matcher.group(2), Integer.parseInt(matcher.group(1)));
+        }
+        return !current.getEffects().isEmpty();
+    }
 
     private static final Pattern NODE_END = Pattern.compile("\\]");
 
     private void parseNodeContent(String line) {
         Matcher matcher = NODE_END.matcher(line);
         if (matcher.matches()) {
-            technologies.put(current.getName(), current);
+            technologies.put(current.getId(), current);
+            log.info("End {}", current);
             current = null;
-        } else {
+        } else if (!line.contains("---")) {
             current.appendText(line.trim());
         }
     }

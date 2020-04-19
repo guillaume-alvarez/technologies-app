@@ -1,263 +1,16 @@
 {
-  "Swordsmanship" : {
-    "id" : "Swordsmanship",
-    "name" : "Swordsmanship",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Swordsmanship\n+2 strength\n---\nSword\nDagger\nShield\nScabbard\nPoint\nEdge\nPommel\nHilt\nGuard",
-    "previous" : [ "Weapons" ],
-    "help" : [ "Bronze", "Iron" ]
-  },
-  "Nationalism" : {
-    "id" : "Nationalism",
-    "name" : "Nationalism",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Nationalism\n+4 social\n---\nNation\nLeader\nRituals\nSoldiers",
-    "previous" : [ "Monotheism" ],
-    "help" : [ ]
-  },
-  "Taming" : {
-    "id" : "Taming",
-    "name" : "Taming",
-    "rank" : 1,
-    "root" : false,
-    "text" : "<b>Taming\n+1 food\n---\nWheat\nBarley\nSorghum\nDog\nCat\nCow\nCamel\nHorse\nLlama\nGoat\nSheep",
-    "previous" : [ "Gathering" ],
-    "help" : [ ]
-  },
-  "Monotheism" : {
-    "id" : "Monotheism",
-    "name" : "Monotheism",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Monotheism\n+3 social\n---\nGod\nSaints\nMarturs\nRituals\nCults\nTemple\nClergy\nMissionaries",
-    "previous" : [ "Polytheism" ],
-    "help" : [ ]
-  },
-  "Jewelry" : {
-    "id" : "Jewelry",
-    "name" : "Jewelry",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Jewelry\n+3 social\n---\nRings\nCollars",
-    "previous" : [ "Ornaments" ],
-    "help" : [ "Metallurgy" ]
-  },
-  "Porcelain" : {
-    "id" : "Porcelain",
-    "name" : "Porcelain",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Porcelain\n+4 food\n---\nJugs\nBottles\nPlates",
-    "previous" : [ "Stoneware" ],
-    "help" : [ "Coal" ]
-  },
-  "Weapons" : {
-    "id" : "Weapons",
-    "name" : "Weapons",
-    "rank" : 1,
-    "root" : false,
-    "text" : "<b>Weapons\n+1 strength\n---\nClub\nStones\nJavelin\nSpear\nKnife\nSword\nBow\nArrows",
-    "previous" : [ "Hunting" ],
-    "help" : [ ]
-  },
-  "Polytheism" : {
-    "id" : "Polytheism",
-    "name" : "Polytheism",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Polytheism\n+2 social\n---\nGods\nSpirits\nRituals\nCults\nTemple\nClergy",
-    "previous" : [ "Pantheism" ],
-    "help" : [ ]
-  },
-  "Cattle" : {
-    "id" : "Cattle",
-    "name" : "Cattle",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Cattle\n+2 food\n---\nCow\nCamel\nHorse\nGoat\nSheep\nLlama",
-    "previous" : [ "Domestication" ],
-    "help" : [ ]
-  },
-  "Animism" : {
-    "id" : "Animism",
-    "name" : "Animism",
+  "Hunting" : {
+    "id" : "Hunting",
+    "name" : "Hunting",
     "rank" : 0,
     "root" : true,
-    "text" : "<b>Animism\n+1 tech +1 social\n---\nShaman\nSpirits\nRituals",
+    "text" : "Mammoths\nAurochs\nSheep",
+    "effects" : {
+      "prod" : 1,
+      "strength" : 1,
+      "food" : 1
+    },
     "previous" : [ ],
-    "help" : [ ]
-  },
-  "Coal" : {
-    "id" : "Coal",
-    "name" : "Coal",
-    "rank" : 1,
-    "root" : false,
-    "text" : "<b>Coal\n+3 prod\n---",
-    "previous" : [ "Firewood" ],
-    "help" : [ ]
-  },
-  "Archery" : {
-    "id" : "Archery",
-    "name" : "Archery",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Archery\n+2 strength\n---\nBow\nArrows",
-    "previous" : [ "Weapons" ],
-    "help" : [ "Woodworking" ]
-  },
-  "Ornaments" : {
-    "id" : "Ornaments",
-    "name" : "Ornaments",
-    "rank" : 1,
-    "root" : false,
-    "text" : "<b>Ornaments\n+2 social\n---\nCopper\nFlowers\nGold\nBones\nWood",
-    "previous" : [ "Clothes" ],
-    "help" : [ ]
-  },
-  "Stonecraft" : {
-    "id" : "Stonecraft",
-    "name" : "Stonecraft",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Stonecraft\n+1 prod\n---\nFlint\nLimestone\nGranite",
-    "previous" : [ "Construction" ],
-    "help" : [ ]
-  },
-  "Theocracy" : {
-    "id" : "Theocracy",
-    "name" : "Theocracy",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Theocracy\n+4 social +1 strength\n---\nPriest\nClergy\nInquisition",
-    "previous" : [ "Monarchy" ],
-    "help" : [ "Monotheism" ]
-  },
-  "Chariot" : {
-    "id" : "Chariot",
-    "name" : "Chariot",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Chariot\n+3 strength\n---\nHorse\nBow\nSpear",
-    "previous" : [ "Weapons" ],
-    "help" : [ "Cattle", "Wheel" ]
-  },
-  "Cavalry" : {
-    "id" : "Cavalry",
-    "name" : "Cavalry",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Chariot\n+4 strength\n---\nHorse\nSword\nSpear\nShield",
-    "previous" : [ "Chariot" ],
-    "help" : [ ]
-  },
-  "Chiefdom" : {
-    "id" : "Chiefdom",
-    "name" : "Chiefdom",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Chiefdom\n+3 social\n---\nChief\nKing\nFamily\nWarriors",
-    "previous" : [ "Village" ],
-    "help" : [ ]
-  },
-  "Bronze" : {
-    "id" : "Bronze",
-    "name" : "Bronze",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Bronze\n+2 prod\n---\nArsenical Bronze\nFurnace",
-    "previous" : [ "Metallurgy" ],
-    "help" : [ "Woodworking" ]
-  },
-  "Construction" : {
-    "id" : "Construction",
-    "name" : "Construction",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Construction\n+1 social\n---\nPorch\nBeams\nHut\nHouse",
-    "previous" : [ "Village" ],
-    "help" : [ ]
-  },
-  "Army" : {
-    "id" : "Army",
-    "name" : "Army",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Army\n+2 strength\n---\nChief\nLeader\nSoldiers",
-    "previous" : [ "Band" ],
-    "help" : [ "City" ]
-  },
-  "Cultivation" : {
-    "id" : "Cultivation",
-    "name" : "Cultivation",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Cultivation\n+2 food\n---\nWheat\nBarley\nSorghum",
-    "previous" : [ "Domestication" ],
-    "help" : [ ]
-  },
-  "Architecture" : {
-    "id" : "Architecture",
-    "name" : "Architecture",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Architecture\n+2 social\n---\nPorch\nBeams\nHut\nHouse",
-    "previous" : [ "Stonecraft" ],
-    "help" : [ ]
-  },
-  "Village" : {
-    "id" : "Village",
-    "name" : "Village",
-    "rank" : 1,
-    "root" : false,
-    "text" : "<b>Village\n+2 social\n---\nStrongman\nKinship\nFamily\nChief\nWarriors",
-    "previous" : [ "Tribe" ],
-    "help" : [ ]
-  },
-  "Domestication" : {
-    "id" : "Domestication",
-    "name" : "Domestication",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Domestication\n+1 food\n---\nWheat\nBarley\nSorghum\nDog\nCow\nCamel\nHorse\nLlama\nGoat\nSheep",
-    "previous" : [ "Taming" ],
-    "help" : [ ]
-  },
-  "City" : {
-    "id" : "City",
-    "name" : "City",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>City\n+3 social\n---\nForum\nTemplate\nGranary\nCitizens\nFamily\nLaws",
-    "previous" : [ "Village" ],
-    "help" : [ "Architecture" ]
-  },
-  "Oil" : {
-    "id" : "Oil",
-    "name" : "Oil",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Oil\n+4 prod\n---",
-    "previous" : [ "Coal" ],
-    "help" : [ ]
-  },
-  "Monarchy" : {
-    "id" : "Monarchy",
-    "name" : "Monarchy",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Monarchy\n+4 social\n---\nKing\nMinister\nLineage\nLaws\nSoldiers",
-    "previous" : [ "Chiefdom" ],
-    "help" : [ "Monotheism" ]
-  },
-  "Democracy" : {
-    "id" : "Democracy",
-    "name" : "Democracy",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Democracy\n+4 social\n---\nForum\nTemplate\nGranary\nCitizens\nLaws\nParliament",
-    "previous" : [ "Republic" ],
     "help" : [ ]
   },
   "Gathering" : {
@@ -265,80 +18,26 @@
     "name" : "Gathering",
     "rank" : 0,
     "root" : true,
-    "text" : "<b>Gathering\n+1 prod +1 food +1 tech\n---\nWheat\nBarley\nSorghum\nStones\nCopper\nGold",
+    "text" : "Wheat\nBarley\nSorghum\nStones\nCopper\nGold",
+    "effects" : {
+      "tech" : 1,
+      "prod" : 1,
+      "food" : 1
+    },
     "previous" : [ ],
     "help" : [ ]
   },
-  "Irrigation" : {
-    "id" : "Irrigation",
-    "name" : "Irrigation",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Irrigation\n+3 food\n---\nWheat\nBarley\nSorghum",
-    "previous" : [ "Cultivation" ],
-    "help" : [ "Cattle" ]
-  },
-  "Wheel" : {
-    "id" : "Wheel",
-    "name" : "Wheel",
+  "Animism" : {
+    "id" : "Animism",
+    "name" : "Animism",
     "rank" : 0,
-    "root" : false,
-    "text" : "<b>Wheel\n+1 prod\n---\nCart",
+    "root" : true,
+    "text" : "Shaman\nSpirits\nRituals",
+    "effects" : {
+      "tech" : 1,
+      "social" : 1
+    },
     "previous" : [ ],
-    "help" : [ "Tools" ]
-  },
-  "Stoneware" : {
-    "id" : "Stoneware",
-    "name" : "Stoneware",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Stoneware\n+3 food\n---\nJugs\nBottles\nPlates",
-    "previous" : [ "Earthenware" ],
-    "help" : [ ]
-  },
-  "Empire" : {
-    "id" : "Empire",
-    "name" : "Empire",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Empire\n+5 social\n---\nKing\nEmpire\nLaws\nBureaucracy\nSoldiers",
-    "previous" : [ "Monarchy" ],
-    "help" : [ ]
-  },
-  "Iron" : {
-    "id" : "Iron",
-    "name" : "Iron",
-    "rank" : 4,
-    "root" : false,
-    "text" : "<b>Iron\n+3 prod\n---\nFurnace",
-    "previous" : [ "Bronze" ],
-    "help" : [ ]
-  },
-  "Plastic" : {
-    "id" : "Plastic",
-    "name" : "Plastic",
-    "rank" : 6,
-    "root" : false,
-    "text" : "<b>Plastic\n+7 prod\n---\nBakelite\nNylon\nVinyl",
-    "previous" : [ "Steel" ],
-    "help" : [ "Oil" ]
-  },
-  "Band" : {
-    "id" : "Band",
-    "name" : "Band",
-    "rank" : 1,
-    "root" : false,
-    "text" : "<b>Band\n+1 strength\n---\nChief\nWarriors",
-    "previous" : [ "Tribe" ],
-    "help" : [ "Weapons" ]
-  },
-  "Republic" : {
-    "id" : "Republic",
-    "name" : "Republic",
-    "rank" : 3,
-    "root" : false,
-    "text" : "<b>Republic\n+4 social\n---\nForum\nTemplate\nGranary\nCitizens\nLaws\nParliament",
-    "previous" : [ "City" ],
     "help" : [ ]
   },
   "Pantheism" : {
@@ -346,8 +45,47 @@
     "name" : "Pantheism",
     "rank" : 1,
     "root" : false,
-    "text" : "<b>Pantheism\n+1 social\n---\nGods\nSpirits\nRituals",
+    "text" : "Gods\nSpirits\nRituals",
+    "effects" : {
+      "social" : 1
+    },
     "previous" : [ "Animism" ],
+    "help" : [ ]
+  },
+  "Polytheism" : {
+    "id" : "Polytheism",
+    "name" : "Polytheism",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Gods\nSpirits\nRituals\nCults\nTemple\nClergy",
+    "effects" : {
+      "social" : 2
+    },
+    "previous" : [ "Pantheism" ],
+    "help" : [ ]
+  },
+  "Monotheism" : {
+    "id" : "Monotheism",
+    "name" : "Monotheism",
+    "rank" : 3,
+    "root" : false,
+    "text" : "God\nSaints\nMarturs\nRituals\nCults\nTemple\nClergy\nMissionaries",
+    "effects" : {
+      "social" : 3
+    },
+    "previous" : [ "Polytheism" ],
+    "help" : [ ]
+  },
+  "Nationalism" : {
+    "id" : "Nationalism",
+    "name" : "Nationalism",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Nation\nLeader\nRituals\nSoldiers",
+    "effects" : {
+      "social" : 4
+    },
+    "previous" : [ "Monotheism" ],
     "help" : [ ]
   },
   "Firewood" : {
@@ -355,34 +93,83 @@
     "name" : "Firewood",
     "rank" : 0,
     "root" : true,
-    "text" : "<b>Firewood\n+1 prod\n---\nOak\nBirch\nPoplar",
+    "text" : "Oak\nBirch\nPoplar",
+    "effects" : {
+      "prod" : 1
+    },
     "previous" : [ ],
     "help" : [ ]
   },
-  "Armor" : {
-    "id" : "Armor",
-    "name" : "Armor",
-    "rank" : 2,
-    "root" : false,
-    "text" : "<b>Armor\n+2 strength\n---\nHelmet\nCuirasse\nShield\nLeather\nPlates\nChainmail",
-    "previous" : [ "Weapons" ],
-    "help" : [ "Bronze", "Iron", "Clothes" ]
-  },
-  "Pottery" : {
-    "id" : "Pottery",
-    "name" : "Pottery",
+  "Taming" : {
+    "id" : "Taming",
+    "name" : "Taming",
     "rank" : 1,
     "root" : false,
-    "text" : "<b>Pottery\n+1 food\n---\nClay\nPots\nKiln\nBricks",
-    "previous" : [ "Wheel" ],
-    "help" : [ "Firewood", "Cultivation" ]
+    "text" : "Wheat\nBarley\nSorghum\nDog\nCat\nCow\nCamel\nHorse\nLlama\nGoat\nSheep",
+    "effects" : {
+      "food" : 1
+    },
+    "previous" : [ "Gathering" ],
+    "help" : [ ]
   },
-  "Tribe" : {
-    "id" : "Tribe",
-    "name" : "Tribe",
+  "Domestication" : {
+    "id" : "Domestication",
+    "name" : "Domestication",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Wheat\nBarley\nSorghum\nDog\nCow\nCamel\nHorse\nLlama\nGoat\nSheep",
+    "effects" : {
+      "food" : 1
+    },
+    "previous" : [ "Taming" ],
+    "help" : [ ]
+  },
+  "Cultivation" : {
+    "id" : "Cultivation",
+    "name" : "Cultivation",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Wheat\nBarley\nSorghum",
+    "effects" : {
+      "food" : 2
+    },
+    "previous" : [ "Domestication" ],
+    "help" : [ ]
+  },
+  "Cattle" : {
+    "id" : "Cattle",
+    "name" : "Cattle",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Cow\nCamel\nHorse\nGoat\nSheep\nLlama",
+    "effects" : {
+      "food" : 2
+    },
+    "previous" : [ "Domestication" ],
+    "help" : [ ]
+  },
+  "Irrigation" : {
+    "id" : "Irrigation",
+    "name" : "Irrigation",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Wheat\nBarley\nSorghum",
+    "effects" : {
+      "food" : 3
+    },
+    "previous" : [ "Cultivation" ],
+    "help" : [ "Cattle" ]
+  },
+  "Tools" : {
+    "id" : "Tools",
+    "name" : "Tools",
     "rank" : 0,
     "root" : true,
-    "text" : "<b>Tribe\n+5 social\n---\nTents\nStrongman\nLineage\nKinship\nWarriors",
+    "text" : "Stick\nHammer",
+    "effects" : {
+      "tech" : 1,
+      "prod" : 2
+    },
     "previous" : [ ],
     "help" : [ ]
   },
@@ -391,26 +178,96 @@
     "name" : "Woodworking",
     "rank" : 1,
     "root" : false,
-    "text" : "<b>Woodworking\n+1 prod\n---\nCedar\nOak\nBirch\nFir\nCherry\nMapple\nPine\nChestnut\nAspen",
+    "text" : "Cedar\nOak\nBirch\nFir\nCherry\nMapple\nPine\nChestnut\nAspen",
+    "effects" : {
+      "prod" : 1
+    },
     "previous" : [ "Tools" ],
     "help" : [ ]
   },
-  "Hunting" : {
-    "id" : "Hunting",
-    "name" : "Hunting",
+  "Clothes" : {
+    "id" : "Clothes",
+    "name" : "Clothes",
     "rank" : 0,
-    "root" : true,
-    "text" : "<b>Hunting\n+1 prod +1 food +1 strength\n---\nMammoths\nAurochs\nSheep",
+    "root" : false,
+    "text" : "Cape\nSewing\nLeather\nFlax\nSilk",
+    "effects" : {
+      "strength" : 1,
+      "social" : 1
+    },
     "previous" : [ ],
+    "help" : [ "Gathering", "Hunting", "Cultivation" ]
+  },
+  "Ornaments" : {
+    "id" : "Ornaments",
+    "name" : "Ornaments",
+    "rank" : 1,
+    "root" : false,
+    "text" : "Copper\nFlowers\nGold\nBones\nWood",
+    "effects" : {
+      "social" : 2
+    },
+    "previous" : [ "Clothes" ],
     "help" : [ ]
   },
-  "Tools" : {
-    "id" : "Tools",
-    "name" : "Tools",
-    "rank" : 0,
-    "root" : true,
-    "text" : "<b>Tools\n+2 prod +1 tech\n---\nStick\nHammer",
-    "previous" : [ ],
+  "Metallurgy" : {
+    "id" : "Metallurgy",
+    "name" : "Metallurgy",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Copper\nGold\nSilver\nTin\nIron\nLead\nFurnace",
+    "effects" : {
+      "prod" : 2
+    },
+    "previous" : [ "Woodworking" ],
+    "help" : [ ]
+  },
+  "Jewelry" : {
+    "id" : "Jewelry",
+    "name" : "Jewelry",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Rings\nCollars",
+    "effects" : {
+      "social" : 3
+    },
+    "previous" : [ "Ornaments" ],
+    "help" : [ "Metallurgy" ]
+  },
+  "Bronze" : {
+    "id" : "Bronze",
+    "name" : "Bronze",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Arsenical Bronze\nFurnace",
+    "effects" : {
+      "prod" : 2
+    },
+    "previous" : [ "Metallurgy" ],
+    "help" : [ "Woodworking" ]
+  },
+  "Iron" : {
+    "id" : "Iron",
+    "name" : "Iron",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Furnace",
+    "effects" : {
+      "prod" : 3
+    },
+    "previous" : [ "Bronze" ],
+    "help" : [ ]
+  },
+  "Coal" : {
+    "id" : "Coal",
+    "name" : "Coal",
+    "rank" : 1,
+    "root" : false,
+    "text" : "",
+    "effects" : {
+      "prod" : 3
+    },
+    "previous" : [ "Firewood" ],
     "help" : [ ]
   },
   "Steel" : {
@@ -418,17 +275,228 @@
     "name" : "Steel",
     "rank" : 5,
     "root" : false,
-    "text" : "<b>Steel\n+4 prod\n---",
+    "text" : "",
+    "effects" : {
+      "prod" : 4
+    },
     "previous" : [ "Iron" ],
     "help" : [ "Coal" ]
   },
-  "Earthenware" : {
-    "id" : "Earthenware",
-    "name" : "Earthenware",
+  "Oil" : {
+    "id" : "Oil",
+    "name" : "Oil",
     "rank" : 2,
     "root" : false,
-    "text" : "<b>Earthenware\n+2 food\n---\nJugs\nBottles\nPlates",
-    "previous" : [ "Pottery" ],
+    "text" : "",
+    "effects" : {
+      "prod" : 4
+    },
+    "previous" : [ "Coal" ],
+    "help" : [ ]
+  },
+  "Weapons" : {
+    "id" : "Weapons",
+    "name" : "Weapons",
+    "rank" : 1,
+    "root" : false,
+    "text" : "Club\nStones\nJavelin\nSpear\nKnife\nSword\nBow\nArrows",
+    "effects" : {
+      "strength" : 1
+    },
+    "previous" : [ "Hunting" ],
+    "help" : [ ]
+  },
+  "Archery" : {
+    "id" : "Archery",
+    "name" : "Archery",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Bow\nArrows",
+    "effects" : {
+      "strength" : 2
+    },
+    "previous" : [ "Weapons" ],
+    "help" : [ "Woodworking" ]
+  },
+  "Swordsmanship" : {
+    "id" : "Swordsmanship",
+    "name" : "Swordsmanship",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Sword\nDagger\nShield\nScabbard\nPoint\nEdge\nPommel\nHilt\nGuard",
+    "effects" : {
+      "strength" : 2
+    },
+    "previous" : [ "Weapons" ],
+    "help" : [ "Bronze", "Iron" ]
+  },
+  "Armor" : {
+    "id" : "Armor",
+    "name" : "Armor",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Helmet\nCuirasse\nShield\nLeather\nPlates\nChainmail",
+    "effects" : {
+      "strength" : 2
+    },
+    "previous" : [ "Weapons" ],
+    "help" : [ "Bronze", "Iron", "Clothes" ]
+  },
+  "Plastic" : {
+    "id" : "Plastic",
+    "name" : "Plastic",
+    "rank" : 6,
+    "root" : false,
+    "text" : "Bakelite\nNylon\nVinyl",
+    "effects" : {
+      "prod" : 7
+    },
+    "previous" : [ "Steel" ],
+    "help" : [ "Oil" ]
+  },
+  "Tribe" : {
+    "id" : "Tribe",
+    "name" : "Tribe",
+    "rank" : 0,
+    "root" : true,
+    "text" : "Tents\nStrongman\nLineage\nKinship\nWarriors",
+    "effects" : {
+      "social" : 5
+    },
+    "previous" : [ ],
+    "help" : [ ]
+  },
+  "Village" : {
+    "id" : "Village",
+    "name" : "Village",
+    "rank" : 1,
+    "root" : false,
+    "text" : "Strongman\nKinship\nFamily\nChief\nWarriors",
+    "effects" : {
+      "social" : 2
+    },
+    "previous" : [ "Tribe" ],
+    "help" : [ ]
+  },
+  "Chiefdom" : {
+    "id" : "Chiefdom",
+    "name" : "Chiefdom",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Chief\nKing\nFamily\nWarriors",
+    "effects" : {
+      "social" : 3
+    },
+    "previous" : [ "Village" ],
+    "help" : [ ]
+  },
+  "Monarchy" : {
+    "id" : "Monarchy",
+    "name" : "Monarchy",
+    "rank" : 3,
+    "root" : false,
+    "text" : "King\nMinister\nLineage\nLaws\nSoldiers",
+    "effects" : {
+      "social" : 4
+    },
+    "previous" : [ "Chiefdom" ],
+    "help" : [ "Monotheism" ]
+  },
+  "Theocracy" : {
+    "id" : "Theocracy",
+    "name" : "Theocracy",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Priest\nClergy\nInquisition",
+    "effects" : {
+      "strength" : 1,
+      "social" : 4
+    },
+    "previous" : [ "Monarchy" ],
+    "help" : [ "Monotheism" ]
+  },
+  "Empire" : {
+    "id" : "Empire",
+    "name" : "Empire",
+    "rank" : 4,
+    "root" : false,
+    "text" : "King\nEmpire\nLaws\nBureaucracy\nSoldiers",
+    "effects" : {
+      "social" : 5
+    },
+    "previous" : [ "Monarchy" ],
+    "help" : [ ]
+  },
+  "Construction" : {
+    "id" : "Construction",
+    "name" : "Construction",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Porch\nBeams\nHut\nHouse",
+    "effects" : {
+      "social" : 1
+    },
+    "previous" : [ "Village" ],
+    "help" : [ ]
+  },
+  "Stonecraft" : {
+    "id" : "Stonecraft",
+    "name" : "Stonecraft",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Flint\nLimestone\nGranite",
+    "effects" : {
+      "prod" : 1
+    },
+    "previous" : [ "Construction" ],
+    "help" : [ ]
+  },
+  "Architecture" : {
+    "id" : "Architecture",
+    "name" : "Architecture",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Porch\nBeams\nHut\nHouse",
+    "effects" : {
+      "social" : 2
+    },
+    "previous" : [ "Stonecraft" ],
+    "help" : [ ]
+  },
+  "City" : {
+    "id" : "City",
+    "name" : "City",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Forum\nTemplate\nGranary\nCitizens\nFamily\nLaws",
+    "effects" : {
+      "social" : 3
+    },
+    "previous" : [ "Village" ],
+    "help" : [ "Architecture" ]
+  },
+  "Republic" : {
+    "id" : "Republic",
+    "name" : "Republic",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Forum\nTemplate\nGranary\nCitizens\nLaws\nParliament",
+    "effects" : {
+      "social" : 4
+    },
+    "previous" : [ "City" ],
+    "help" : [ ]
+  },
+  "Democracy" : {
+    "id" : "Democracy",
+    "name" : "Democracy",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Forum\nTemplate\nGranary\nCitizens\nLaws\nParliament",
+    "effects" : {
+      "social" : 4
+    },
+    "previous" : [ "Republic" ],
     "help" : [ ]
   },
   "Music" : {
@@ -436,26 +504,119 @@
     "name" : "Music",
     "rank" : 0,
     "root" : false,
-    "text" : "<b>Music\n+2 social\n---\nSong\nPercussion",
+    "text" : "Song\nPercussion",
+    "effects" : {
+      "social" : 2
+    },
     "previous" : [ ],
     "help" : [ "Tribe" ]
   },
-  "Clothes" : {
-    "id" : "Clothes",
-    "name" : "Clothes",
+  "Wheel" : {
+    "id" : "Wheel",
+    "name" : "Wheel",
     "rank" : 0,
     "root" : false,
-    "text" : "<b>Clothes\n+1 social +1 strength\n---\nCape\nSewing\nLeather\nFlax\nSilk",
+    "text" : "Cart",
+    "effects" : {
+      "prod" : 1
+    },
     "previous" : [ ],
-    "help" : [ "Gathering", "Hunting", "Cultivation" ]
+    "help" : [ "Tools" ]
   },
-  "Metallurgy" : {
-    "id" : "Metallurgy",
-    "name" : "Metallurgy",
+  "Pottery" : {
+    "id" : "Pottery",
+    "name" : "Pottery",
+    "rank" : 1,
+    "root" : false,
+    "text" : "Clay\nPots\nKiln\nBricks",
+    "effects" : {
+      "food" : 1
+    },
+    "previous" : [ "Wheel" ],
+    "help" : [ "Firewood", "Cultivation" ]
+  },
+  "Earthenware" : {
+    "id" : "Earthenware",
+    "name" : "Earthenware",
     "rank" : 2,
     "root" : false,
-    "text" : "<b>Metallurgy\n+2 prod\n---\nCopper\nGold\nSilver\nTin\nIron\nLead\nFurnace",
-    "previous" : [ "Woodworking" ],
+    "text" : "Jugs\nBottles\nPlates",
+    "effects" : {
+      "food" : 2
+    },
+    "previous" : [ "Pottery" ],
     "help" : [ ]
+  },
+  "Stoneware" : {
+    "id" : "Stoneware",
+    "name" : "Stoneware",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Jugs\nBottles\nPlates",
+    "effects" : {
+      "food" : 3
+    },
+    "previous" : [ "Earthenware" ],
+    "help" : [ ]
+  },
+  "Porcelain" : {
+    "id" : "Porcelain",
+    "name" : "Porcelain",
+    "rank" : 4,
+    "root" : false,
+    "text" : "Jugs\nBottles\nPlates",
+    "effects" : {
+      "food" : 4
+    },
+    "previous" : [ "Stoneware" ],
+    "help" : [ "Coal" ]
+  },
+  "Chariot" : {
+    "id" : "Chariot",
+    "name" : "Chariot",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Horse\nBow\nSpear",
+    "effects" : {
+      "strength" : 3
+    },
+    "previous" : [ "Weapons" ],
+    "help" : [ "Cattle", "Wheel" ]
+  },
+  "Cavalry" : {
+    "id" : "Cavalry",
+    "name" : "Chariot",
+    "rank" : 3,
+    "root" : false,
+    "text" : "Horse\nSword\nSpear\nShield",
+    "effects" : {
+      "strength" : 4
+    },
+    "previous" : [ "Chariot" ],
+    "help" : [ ]
+  },
+  "Band" : {
+    "id" : "Band",
+    "name" : "Band",
+    "rank" : 1,
+    "root" : false,
+    "text" : "Chief\nWarriors",
+    "effects" : {
+      "strength" : 1
+    },
+    "previous" : [ "Tribe" ],
+    "help" : [ "Weapons" ]
+  },
+  "Army" : {
+    "id" : "Army",
+    "name" : "Army",
+    "rank" : 2,
+    "root" : false,
+    "text" : "Chief\nLeader\nSoldiers",
+    "effects" : {
+      "strength" : 2
+    },
+    "previous" : [ "Band" ],
+    "help" : [ "City" ]
   }
 }

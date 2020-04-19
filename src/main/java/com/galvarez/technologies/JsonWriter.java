@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,26 +23,31 @@ public class JsonWriter {
     private static final Logger log = LoggerFactory.getLogger(JsonWriter.class);
 
     public final class TechnologySerializer extends StdSerializer<Technology> {
-        
+
         private static final long serialVersionUID = 1L;
 
         public TechnologySerializer() {
             this(Technology.class);
         }
-       
+
         public TechnologySerializer(Class<Technology> t) {
             super(t);
         }
 
         @Override
-        public void serialize(Technology tech, JsonGenerator jgen, SerializerProvider provider) 
-          throws IOException {
+        public void serialize(Technology tech, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             jgen.writeStartObject();
             jgen.writeStringField("id", tech.getId());
             jgen.writeStringField("name", tech.getName());
             jgen.writeNumberField("rank", tech.getRank());
-            jgen.writeBooleanField("root",tech.isRoot());
+            jgen.writeBooleanField("root", tech.isRoot());
             jgen.writeStringField("text", tech.getText());
+
+            jgen.writeFieldName("effects");
+            jgen.writeStartObject();
+            for (Entry<String, Integer> e : tech.getEffects().entrySet())
+                jgen.writeNumberField(e.getKey(), e.getValue().intValue());
+            jgen.writeEndObject();
 
             jgen.writeArrayFieldStart("previous");
             for(Technology t : tech.getPrevious())
