@@ -5,12 +5,12 @@
         <p class="card-header-title">
           {{ tech.name }}
         </p>
-        <div class="card-header-icon">
+        <div class="card-header-icon effects">
           <span v-for="(value, name) in tech.effects" :key="name">
-            <figure class="image is-32x32">
+            <figure class="image is-32x32 effect">
               <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
+              <p class="effect-value">+{{value }}</p>
             </figure>
-            <p>+{{value }}</p>
           </span>
         </div>
       </header>
@@ -65,12 +65,22 @@ export default class TechCard extends Vue {
 .card-header-title {
   padding: 0.5em;
 }
-.card-header-icon {
+.card-content {
+  padding: 0.5em;
+}
+.effects {
   padding: 0.5em;
 }
 
-.card-content {
-  padding: 0.5em;
+.effect-value {
+  /* position on the image */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  line-height: 0.7; /* do not keep space below the line */
+  /* make it readable over any image */
+  font-weight: bold;
+  color: black;
 }
 
 .tech-text {
