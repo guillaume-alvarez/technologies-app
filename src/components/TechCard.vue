@@ -52,7 +52,7 @@ export default class TechCard extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .card {
-  width: 200px;
+  min-width: 10em;
   background-image: url("../assets/parch-texture.png");
 
   /* strong shadow */
@@ -80,6 +80,7 @@ export default class TechCard extends Vue {
   line-height: 0.7; /* do not keep space below the line */
   /* make it readable over any image */
   font-weight: bold;
+  font-size: larger;
   color: black;
 }
 
