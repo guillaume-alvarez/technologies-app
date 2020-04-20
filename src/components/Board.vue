@@ -10,7 +10,12 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 import Era from './Era.vue';
-import { technologies, Technology, Effects } from '../technology';
+import {
+  Technology,
+  Effects,
+  technologies,
+  includesPrevious,
+} from '../technology';
 
 @Component({
   components: {
@@ -23,8 +28,18 @@ export default class Board extends Vue {
   private presentTechs: Array<Technology>
    = technologies.filter((tech) => tech.rank === 0).sort(Board.compareTech).reverse();
 
-  private futureTechs: Array<Technology>
-   = technologies.filter((tech) => tech.rank > 0).sort(Board.compareTech).reverse();
+  get futureTechs(): Array<Technology> {
+    return technologies
+      // tech not already discovered
+      .filter((tech) => !this.pastTechs.includes(tech))
+      .filter((tech) => !this.presentTechs.includes(tech))
+      // tech can be discovered
+      // eslint-disable-next-line max-len
+      .filter((tech) => includesPrevious(tech, this.pastTechs) || includesPrevious(tech, this.presentTechs))
+      // and sorted
+      .sort(Board.compareTech)
+      .reverse();
+  }
 
   static removeTech(array: Array<Technology>, tech: Technology): boolean {
     const idx = array.indexOf(tech);

@@ -26,3 +26,10 @@ export const technologies: Array<Technology> = Object.entries(data).map(([key, v
 export function getTechnology(id: string) {
   return map[id];
 }
+
+/**
+ * @returns true if all 'previous' for tech are in the array.
+ */
+export function includesPrevious(tech: Technology, array: Array<Technology>): boolean {
+  return tech.previous.every((previous) => array.some((t) => t.id === previous));
+}
