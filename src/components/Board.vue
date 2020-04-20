@@ -15,6 +15,7 @@ import {
   Effects,
   technologies,
   includesPrevious,
+  getTechnology,
 } from '../technology';
 
 @Component({
@@ -90,17 +91,28 @@ export default class Board extends Vue {
     return a.name.localeCompare(b.name);
   }
 
+  private addPresentTech(tech: Technology): void {
+    this.presentTechs.push(tech);
+    this.presentTechs.sort(Board.compareTech).reverse();
+    // also push previous to past
+    tech.previous.forEach((p) => {
+      const previous = getTechnology(p);
+      if (Board.removeTech(this.presentTechs, previous)) {
+        this.addPastTech(previous);
+      }
+    });
+  }
+
+  private addPastTech(tech: Technology): void {
+    this.pastTechs.push(tech);
+    this.pastTechs.sort(Board.compareTech).reverse();
+  }
+
   onSelectTech(tech: Technology): void {
     if (Board.removeTech(this.futureTechs, tech)) {
-      this.presentTechs.push(tech);
-      this.presentTechs.sort(Board.compareTech).reverse();
-      console.log('Move %s to present techs', tech.name);
+      this.addPresentTech(tech);
     } else if (Board.removeTech(this.presentTechs, tech)) {
-      this.pastTechs.push(tech);
-      this.pastTechs.sort(Board.compareTech).reverse();
-      console.log('Move %s to past techs', tech.name);
-    } else {
-      console.log('Cannot remove past tech %s', tech.name);
+      this.addPastTech(tech);
     }
   }
 }
