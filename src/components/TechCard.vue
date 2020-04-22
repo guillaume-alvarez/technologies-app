@@ -8,14 +8,12 @@
           </p>
           <div class="card-header-icon">
             <span class="era" :title="tech.era.name">{{ tech.era.roman }}</span>
-            <div class="effects">
-              <span v-for="(value, name) in tech.effects" :key="name">
-                <figure class="image is-32x32 effect">
-                  <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
-                  <p class="effect-value">+{{value }}</p>
-                </figure>
-              </span>
-            </div>
+            <span v-for="(value, name) in tech.effects" :key="name">
+              <figure class="image is-32x32 effect">
+                <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
+                <p class="effect-value">+{{value }}</p>
+              </figure>
+            </span>
           </div>
         </header>
         <div class="card-content">
@@ -82,11 +80,15 @@ export default class TechCard extends Vue {
 .card-content {
   padding: 0.5em;
 }
-.effects {
+.card-header-icon {
   padding: 0.5em;
 }
 
 .era {
+  /* separate from icons */
+  padding: 0.3em;
+  border-radius: 0.5em; /* slightly round corner */
+  border: thin outset black;
   /* make it readable over any image */
   font-weight: bold;
   font-size: larger;
