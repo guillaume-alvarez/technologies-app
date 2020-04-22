@@ -1,38 +1,49 @@
 <template>
-  <div class="tech">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">
-          {{ tech.name }}
-        </p>
-        <div class="card-header-icon effects">
-          <span v-for="(value, name) in tech.effects" :key="name">
-            <figure class="image is-32x32 effect">
-              <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
-              <p class="effect-value">+{{value }}</p>
-            </figure>
-          </span>
-        </div>
-      </header>
-      <div class="card-content">
-        <div class="content tech-text">
-          {{ text }}
+  <CardMove :duration="500">
+    <div class="tech column is-narrow" @click="$emit('select-tech', tech)">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{ tech.name }}
+          </p>
+          <div class="card-header-icon effects">
+            <span v-for="(value, name) in tech.effects" :key="name">
+              <figure class="image is-32x32 effect">
+                <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
+                <p class="effect-value">+{{value }}</p>
+              </figure>
+            </span>
+          </div>
+        </header>
+        <div class="card-content">
+          <div class="content tech-text">
+            {{ text }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </CardMove>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import CardMove from './CardMove.vue';
 import { Technology, Effects } from '../technology';
 
-@Component
+@Component({
+  components: {
+    CardMove,
+  },
+})
 export default class TechCard extends Vue {
   @Prop() private tech!: Technology;
 
   get text(): string {
     return this.tech.text;
+  }
+
+  get id(): string {
+    return this.tech.id;
   }
 
   getIconPath = function getIconPath(effect: keyof Effects): string {

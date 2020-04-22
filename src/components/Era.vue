@@ -1,14 +1,12 @@
 <template>
   <div class="era">
     <section class="section">
-        <h1 class="title">{{ name }}</h1>
-        <div class="columns is-multiline">
-          <div class="column is-narrow" v-for="tech in techs" v-bind:key="tech.id">
-            <div @click="$emit('select-tech', tech)">
-              <TechCard :tech="tech"/>
-            </div>
-          </div>
-        </div>
+      <h1 class="title">{{ name }}</h1>
+      <div class="columns is-multiline">
+        <TechCard v-for="tech in techs" :key="tech.id"
+          :id="tech.id" :tech="tech" @select-tech="$emit('select-tech', tech)">
+        </TechCard>
+      </div>
     </section>
   </div>
 </template>
