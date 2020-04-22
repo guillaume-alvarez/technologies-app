@@ -6,13 +6,16 @@
           <p class="card-header-title">
             {{ tech.name }}
           </p>
-          <div class="card-header-icon effects">
-            <span v-for="(value, name) in tech.effects" :key="name">
-              <figure class="image is-32x32 effect">
-                <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
-                <p class="effect-value">+{{value }}</p>
-              </figure>
-            </span>
+          <div class="card-header-icon">
+            <span class="era" :title="tech.era.name">{{ tech.era.roman }}</span>
+            <div class="effects">
+              <span v-for="(value, name) in tech.effects" :key="name">
+                <figure class="image is-32x32 effect">
+                  <img :src="getIconPath(name)" :title="'+' + value + ' ' + name">
+                  <p class="effect-value">+{{value }}</p>
+                </figure>
+              </span>
+            </div>
           </div>
         </header>
         <div class="card-content">
@@ -28,7 +31,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import CardMove from './CardMove.vue';
-import { Technology, Effects } from '../technology';
+import { Technology, Effects } from '../model/technology';
 
 @Component({
   components: {
@@ -81,6 +84,13 @@ export default class TechCard extends Vue {
 }
 .effects {
   padding: 0.5em;
+}
+
+.era {
+  /* make it readable over any image */
+  font-weight: bold;
+  font-size: larger;
+  color: black;
 }
 
 .effect-value {

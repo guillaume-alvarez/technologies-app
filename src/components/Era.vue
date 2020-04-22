@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import TechCard from './TechCard.vue';
-import { Technology } from '../technology';
+import { Technology } from '../model/technology';
 
 @Component({
   components: {

@@ -11,7 +11,8 @@
       "food" : 1
     },
     "previous" : [ ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 1
   },
   "Gathering" : {
     "id" : "Gathering",
@@ -25,7 +26,8 @@
       "food" : 1
     },
     "previous" : [ ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 1
   },
   "Animism" : {
     "id" : "Animism",
@@ -38,7 +40,8 @@
       "social" : 1
     },
     "previous" : [ ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 1
   },
   "Pantheism" : {
     "id" : "Pantheism",
@@ -50,7 +53,8 @@
       "social" : 1
     },
     "previous" : [ "Animism" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 2
   },
   "Polytheism" : {
     "id" : "Polytheism",
@@ -62,7 +66,8 @@
       "social" : 2
     },
     "previous" : [ "Pantheism" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 3
   },
   "Monotheism" : {
     "id" : "Monotheism",
@@ -74,7 +79,8 @@
       "social" : 3
     },
     "previous" : [ "Polytheism" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Nationalism" : {
     "id" : "Nationalism",
@@ -86,7 +92,8 @@
       "social" : 4
     },
     "previous" : [ "Monotheism" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 9
   },
   "Firewood" : {
     "id" : "Firewood",
@@ -98,7 +105,8 @@
       "prod" : 1
     },
     "previous" : [ ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 1
   },
   "Taming" : {
     "id" : "Taming",
@@ -110,7 +118,8 @@
       "food" : 1
     },
     "previous" : [ "Gathering" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 2
   },
   "Domestication" : {
     "id" : "Domestication",
@@ -122,7 +131,8 @@
       "food" : 1
     },
     "previous" : [ "Taming" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 3
   },
   "Cultivation" : {
     "id" : "Cultivation",
@@ -134,7 +144,8 @@
       "food" : 2
     },
     "previous" : [ "Domestication" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Cattle" : {
     "id" : "Cattle",
@@ -146,7 +157,8 @@
       "food" : 2
     },
     "previous" : [ "Domestication" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Irrigation" : {
     "id" : "Irrigation",
@@ -158,7 +170,8 @@
       "food" : 3
     },
     "previous" : [ "Cultivation" ],
-    "help" : [ "Cattle" ]
+    "help" : [ "Cattle" ],
+    "era": 5
   },
   "Tools" : {
     "id" : "Tools",
@@ -171,7 +184,8 @@
       "prod" : 2
     },
     "previous" : [ ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 1
   },
   "Woodworking" : {
     "id" : "Woodworking",
@@ -183,32 +197,8 @@
       "prod" : 1
     },
     "previous" : [ "Tools" ],
-    "help" : [ ]
-  },
-  "Clothes" : {
-    "id" : "Clothes",
-    "name" : "Clothes",
-    "rank" : 0,
-    "root" : false,
-    "text" : "Cape\nSewing\nLeather\nFlax\nSilk",
-    "effects" : {
-      "strength" : 1,
-      "social" : 1
-    },
-    "previous" : [ ],
-    "help" : [ "Gathering", "Hunting", "Cultivation" ]
-  },
-  "Ornaments" : {
-    "id" : "Ornaments",
-    "name" : "Ornaments",
-    "rank" : 1,
-    "root" : false,
-    "text" : "Copper\nFlowers\nGold\nBones\nWood",
-    "effects" : {
-      "social" : 2
-    },
-    "previous" : [ "Clothes" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 2
   },
   "Metallurgy" : {
     "id" : "Metallurgy",
@@ -220,19 +210,8 @@
       "prod" : 2
     },
     "previous" : [ "Woodworking" ],
-    "help" : [ ]
-  },
-  "Jewelry" : {
-    "id" : "Jewelry",
-    "name" : "Jewelry",
-    "rank" : 2,
-    "root" : false,
-    "text" : "Rings\nCollars",
-    "effects" : {
-      "social" : 3
-    },
-    "previous" : [ "Ornaments" ],
-    "help" : [ "Metallurgy" ]
+    "help" : [ ],
+    "era": 1
   },
   "Bronze" : {
     "id" : "Bronze",
@@ -244,7 +223,8 @@
       "prod" : 2
     },
     "previous" : [ "Metallurgy" ],
-    "help" : [ "Woodworking" ]
+    "help" : [ "Woodworking" ],
+    "era": 2
   },
   "Iron" : {
     "id" : "Iron",
@@ -256,7 +236,8 @@
       "prod" : 3
     },
     "previous" : [ "Bronze" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 3
   },
   "Coal" : {
     "id" : "Coal",
@@ -268,7 +249,8 @@
       "prod" : 3
     },
     "previous" : [ "Firewood" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 8
   },
   "Steel" : {
     "id" : "Steel",
@@ -280,7 +262,8 @@
       "prod" : 4
     },
     "previous" : [ "Iron" ],
-    "help" : [ "Coal" ]
+    "help" : [ "Coal" ],
+    "era": 9
   },
   "Oil" : {
     "id" : "Oil",
@@ -292,7 +275,8 @@
       "prod" : 4
     },
     "previous" : [ "Coal" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 10
   },
   "Weapons" : {
     "id" : "Weapons",
@@ -304,7 +288,8 @@
       "strength" : 1
     },
     "previous" : [ "Hunting" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 2
   },
   "Archery" : {
     "id" : "Archery",
@@ -316,7 +301,8 @@
       "strength" : 2
     },
     "previous" : [ "Weapons" ],
-    "help" : [ "Woodworking" ]
+    "help" : [ "Woodworking" ],
+    "era": 3
   },
   "Swordsmanship" : {
     "id" : "Swordsmanship",
@@ -328,7 +314,8 @@
       "strength" : 2
     },
     "previous" : [ "Weapons" ],
-    "help" : [ "Bronze", "Iron" ]
+    "help" : [ "Bronze", "Iron" ],
+    "era": 3
   },
   "Armor" : {
     "id" : "Armor",
@@ -340,7 +327,8 @@
       "strength" : 2
     },
     "previous" : [ "Weapons" ],
-    "help" : [ "Bronze", "Iron", "Clothes" ]
+    "help" : [ "Bronze", "Iron", "Clothes" ],
+    "era": 3
   },
   "Plastic" : {
     "id" : "Plastic",
@@ -352,7 +340,8 @@
       "prod" : 7
     },
     "previous" : [ "Steel" ],
-    "help" : [ "Oil" ]
+    "help" : [ "Oil" ],
+    "era": 10
   },
   "Tribe" : {
     "id" : "Tribe",
@@ -364,7 +353,8 @@
       "social" : 5
     },
     "previous" : [ ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 1
   },
   "Village" : {
     "id" : "Village",
@@ -376,7 +366,8 @@
       "social" : 2
     },
     "previous" : [ "Tribe" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 2
   },
   "Chiefdom" : {
     "id" : "Chiefdom",
@@ -388,7 +379,8 @@
       "social" : 3
     },
     "previous" : [ "Village" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 3
   },
   "Monarchy" : {
     "id" : "Monarchy",
@@ -400,7 +392,8 @@
       "social" : 4
     },
     "previous" : [ "Chiefdom" ],
-    "help" : [ "Monotheism" ]
+    "help" : [ "Monotheism" ],
+    "era": 4
   },
   "Theocracy" : {
     "id" : "Theocracy",
@@ -413,7 +406,8 @@
       "social" : 4
     },
     "previous" : [ "Monarchy" ],
-    "help" : [ "Monotheism" ]
+    "help" : [ "Monotheism" ],
+    "era": 5
   },
   "Empire" : {
     "id" : "Empire",
@@ -425,7 +419,8 @@
       "social" : 5
     },
     "previous" : [ "Monarchy" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 5
   },
   "Construction" : {
     "id" : "Construction",
@@ -437,7 +432,8 @@
       "social" : 1
     },
     "previous" : [ "Village" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 3
   },
   "Stonecraft" : {
     "id" : "Stonecraft",
@@ -449,7 +445,8 @@
       "prod" : 1
     },
     "previous" : [ "Construction" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Architecture" : {
     "id" : "Architecture",
@@ -461,7 +458,8 @@
       "social" : 2
     },
     "previous" : [ "Stonecraft" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 5
   },
   "City" : {
     "id" : "City",
@@ -473,7 +471,8 @@
       "social" : 3
     },
     "previous" : [ "Village" ],
-    "help" : [ "Architecture" ]
+    "help" : [ "Architecture" ],
+    "era": 3
   },
   "Republic" : {
     "id" : "Republic",
@@ -485,7 +484,8 @@
       "social" : 4
     },
     "previous" : [ "City" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Democracy" : {
     "id" : "Democracy",
@@ -497,19 +497,8 @@
       "social" : 4
     },
     "previous" : [ "Republic" ],
-    "help" : [ ]
-  },
-  "Music" : {
-    "id" : "Music",
-    "name" : "Music",
-    "rank" : 0,
-    "root" : false,
-    "text" : "Song\nPercussion",
-    "effects" : {
-      "social" : 2
-    },
-    "previous" : [ ],
-    "help" : [ "Tribe" ]
+    "help" : [ ],
+    "era": 5
   },
   "Wheel" : {
     "id" : "Wheel",
@@ -521,7 +510,8 @@
       "prod" : 1
     },
     "previous" : [ ],
-    "help" : [ "Tools" ]
+    "help" : [ "Tools" ],
+    "era": 1
   },
   "Pottery" : {
     "id" : "Pottery",
@@ -533,7 +523,8 @@
       "food" : 1
     },
     "previous" : [ "Wheel" ],
-    "help" : [ "Firewood", "Cultivation" ]
+    "help" : [ "Firewood", "Cultivation" ],
+    "era": 2
   },
   "Earthenware" : {
     "id" : "Earthenware",
@@ -545,7 +536,8 @@
       "food" : 2
     },
     "previous" : [ "Pottery" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 3
   },
   "Stoneware" : {
     "id" : "Stoneware",
@@ -557,7 +549,8 @@
       "food" : 3
     },
     "previous" : [ "Earthenware" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Porcelain" : {
     "id" : "Porcelain",
@@ -569,7 +562,8 @@
       "food" : 4
     },
     "previous" : [ "Stoneware" ],
-    "help" : [ "Coal" ]
+    "help" : [ "Coal" ],
+    "era": 5
   },
   "Chariot" : {
     "id" : "Chariot",
@@ -581,7 +575,8 @@
       "strength" : 3
     },
     "previous" : [ "Weapons" ],
-    "help" : [ "Cattle", "Wheel" ]
+    "help" : [ "Cattle", "Wheel" ],
+    "era": 3
   },
   "Cavalry" : {
     "id" : "Cavalry",
@@ -593,7 +588,8 @@
       "strength" : 4
     },
     "previous" : [ "Chariot" ],
-    "help" : [ ]
+    "help" : [ ],
+    "era": 4
   },
   "Band" : {
     "id" : "Band",
@@ -605,7 +601,8 @@
       "strength" : 1
     },
     "previous" : [ "Tribe" ],
-    "help" : [ "Weapons" ]
+    "help" : [ "Weapons" ],
+    "era": 2
   },
   "Army" : {
     "id" : "Army",
@@ -617,6 +614,7 @@
       "strength" : 2
     },
     "previous" : [ "Band" ],
-    "help" : [ "City" ]
+    "help" : [ "City" ],
+    "era": 3
   }
 }

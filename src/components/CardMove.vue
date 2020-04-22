@@ -48,7 +48,6 @@ export default class CardMove extends Vue {
 
   // eslint-disable-next-line class-methods-use-this
   public beforeLeave(el: HTMLElement) {
-    console.log('Store position for %s', el.id);
     CardMove.previousPositions.set(el.id, el.getBoundingClientRect());
   }
 }

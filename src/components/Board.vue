@@ -15,8 +15,7 @@ import {
   Effects,
   technologies,
   includesPrevious,
-  getTechnology,
-} from '../technology';
+} from '../model/technology';
 
 @Component({
   components: {
@@ -27,7 +26,7 @@ export default class Board extends Vue {
   private pastTechs: Array<Technology> = [];
 
   private presentTechs: Array<Technology>
-   = technologies.filter((tech) => tech.rank === 0).sort(Board.compareTech).reverse();
+   = technologies.filter((tech) => tech.root).sort(Board.compareTech).reverse();
 
   get futureTechs(): Array<Technology> {
     return technologies
@@ -95,8 +94,7 @@ export default class Board extends Vue {
     this.presentTechs.push(tech);
     this.presentTechs.sort(Board.compareTech).reverse();
     // also push previous to past
-    tech.previous.forEach((p) => {
-      const previous = getTechnology(p);
+    tech.previous.forEach((previous) => {
       if (Board.removeTech(this.presentTechs, previous)) {
         this.addPastTech(previous);
       }
