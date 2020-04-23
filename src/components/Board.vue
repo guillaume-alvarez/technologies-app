@@ -1,5 +1,6 @@
 <template>
   <div id="board">
+      <Summary name="Future" :techs="playerTechs"/>
       <Era name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
       <Era name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
       <Era name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
@@ -11,6 +12,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
 import Era from './Era.vue';
+import Summary from './Summary.vue';
 import {
   Technology,
   Effects,
@@ -21,6 +23,7 @@ import {
 @Component({
   components: {
     Era,
+    Summary,
   },
 })
 export default class Board extends Vue {
@@ -30,6 +33,10 @@ export default class Board extends Vue {
 
   private presentTechs: Array<Technology>
    = technologies.filter((tech) => tech.root).sort(Board.compareTech).reverse();
+
+  get playerTechs(): Array<Technology> {
+    return [...this.presentTechs, ...this.pastTechs];
+  }
 
   get futureTechs(): Array<Technology> {
     return technologies

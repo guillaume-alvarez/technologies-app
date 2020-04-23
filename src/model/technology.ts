@@ -9,6 +9,8 @@ export interface Effects {
   tech?: number;
 }
 
+export const EFFECTS_NAMES: Array<keyof Effects> = ['food', 'prod', 'social', 'strength', 'tech'];
+
 interface TechnologyData {
   id: string;
   name: string;
