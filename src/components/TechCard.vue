@@ -1,7 +1,10 @@
 <template>
   <CardMove :duration="500">
-    <div class="tech column is-narrow" @click="$emit('select-tech', tech)">
-      <div class="card">
+    <div class="tech column is-narrow" @click="onClick()">
+      <div class="card"
+        :class="highlight ? 'highlight' : ''"
+        @mouseover="onMouseOver()"
+        @mouseleave="onMouseLeave()">
         <header class="card-header">
           <p class="card-header-title">
             {{ tech.name }}
@@ -28,6 +31,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { bus } from '../main';
 import CardMove from './CardMove.vue';
 import { Technology, Effects } from '../model/technology';
 
@@ -38,6 +42,8 @@ import { Technology, Effects } from '../model/technology';
 })
 export default class TechCard extends Vue {
   @Prop() private tech!: Technology;
+
+  @Prop() private highlight!: boolean;
 
   get text(): string {
     return this.tech.text;
@@ -57,6 +63,18 @@ export default class TechCard extends Vue {
       case 'tech': return icons('./enlightenment.svg');
       default: return '';
     }
+  }
+
+  onClick() {
+    bus.$emit('select-tech', this.tech);
+  }
+
+  onMouseOver() {
+    bus.$emit('hover-tech', this.tech, true);
+  }
+
+  onMouseLeave() {
+    bus.$emit('hover-tech', this.tech, false);
   }
 }
 </script>
@@ -110,5 +128,15 @@ export default class TechCard extends Vue {
 .tech-text {
   white-space: pre-line; /* keep formatting from json */
   text-align: left;
+}
+
+.highlight:before {
+  transform: scale(1.2);
+  box-shadow: 0 0 1em yellow inset, 0 0 1em yellow;
+  filter: blur(1em);
+}
+
+.highlight {
+  box-shadow: 0 0 1em yellow inset, 0 0 1em yellow;
 }
 </style>

@@ -4,7 +4,7 @@
       <h1 class="title">{{ name }}</h1>
       <div class="columns is-multiline">
         <TechCard v-for="tech in techs" :key="tech.id"
-          :id="tech.id" :tech="tech" @select-tech="$emit('select-tech', tech)">
+          :id="tech.id" :tech="tech" :highlight="highlight(tech)">
         </TechCard>
       </div>
     </section>
@@ -25,6 +25,12 @@ export default class Era extends Vue {
   @Prop() private name!: string;
 
   @Prop() private techs!: Array<Technology>;
+
+  @Prop() private highlightedTechs!: Array<Technology>;
+
+  highlight(tech: Technology): boolean {
+    return this.highlightedTechs.includes(tech);
+  }
 }
 </script>
 

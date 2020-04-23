@@ -1,14 +1,15 @@
 <template>
   <div id="board">
-      <Era name="Future" :techs="futureTechs" @select-tech="onSelectTech"/>
-      <Era name="Present" :techs="presentTechs" @select-tech="onSelectTech"/>
-      <Era name="Past" :techs="pastTechs" @select-tech="onSelectTech"/>
+      <Era name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
+      <Era name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
+      <Era name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
   </div>
 </template>
 
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator';
+import { bus } from '../main';
 import Era from './Era.vue';
 import {
   Technology,
@@ -23,7 +24,9 @@ import {
   },
 })
 export default class Board extends Vue {
-  private pastTechs: Array<Technology> = [];
+  private highlightedTechs = new Array<Technology>();
+
+  private pastTechs = new Array<Technology>();
 
   private presentTechs: Array<Technology>
    = technologies.filter((tech) => tech.root).sort(Board.compareTech).reverse();
@@ -39,6 +42,16 @@ export default class Board extends Vue {
       // and sorted
       .sort(Board.compareTech)
       .reverse();
+  }
+
+  created() {
+    bus.$on('select-tech', (tech: Technology) => {
+      this.onSelectTech(tech);
+    });
+    bus.$on('hover-tech', (...args: any[]) => {
+      const [tech, hover] = args;
+      this.onHoverTech(tech, hover);
+    });
   }
 
   static removeTech(array: Array<Technology>, tech: Technology): boolean {
@@ -111,6 +124,19 @@ export default class Board extends Vue {
       this.addPresentTech(tech);
     } else if (Board.removeTech(this.presentTechs, tech)) {
       this.addPastTech(tech);
+    }
+  }
+
+  /** Highlight selected tech + previous + next */
+  onHoverTech(tech: Technology, hover: boolean): void {
+    if (hover) {
+      this.highlightedTechs = [
+        tech,
+        ...tech.previous,
+        ...this.futureTechs.filter((t) => t.previous.includes(tech)),
+      ];
+    } else {
+      this.highlightedTechs = [];
     }
   }
 }

@@ -9,6 +9,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+/**
+ * @see https://github.com/inamori/vue-parent-change-transition
+ */
 @Component
 export default class CardMove extends Vue {
   private static previousPositions = new Map<string, DOMRect>();
