@@ -27,6 +27,8 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  overflow-x: scroll;
+  /*overflow-x: scroll;*/
+  /* set here, if set in Era.vue it would show divisions between sections */
+  background-image: url("./assets/big-marble-texture.png");
 }
 </style>

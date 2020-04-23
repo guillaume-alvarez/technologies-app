@@ -149,9 +149,5 @@ export default class Board extends Vue {
 }
 </script>
 
-<style>
-#board {
-  /* set here, if set in Era.vue it would show divisions between sections */
-  background-image: url("../assets/big-marble-texture.png");
-}
+<style scoped>
 </style>

@@ -1,10 +1,7 @@
 <template>
-  <div class="summary">
-    <div class="level">
-      <div class="level-item" v-for="tmp of effects" :key="tmp.name">
-        <EffectIcon :name="tmp.name" :value="'+' + tmp.value" :tooltip="tmp.sources.join('\n')"
-        />
-      </div>
+  <div class="summary level">
+    <div class="level-item" v-for="tmp of effects" :key="tmp.name">
+      <EffectIcon :name="tmp.name" :value="'+' + tmp.value" :tooltip="tmp.sources.join('\n')"/>
     </div>
   </div>
 </template>
@@ -61,4 +58,7 @@ export default class Summary extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.summary {
+  padding: 1em;
+}
 </style>

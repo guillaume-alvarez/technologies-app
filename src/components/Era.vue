@@ -1,8 +1,10 @@
 <template>
   <div class="era">
     <section class="section">
-      <h1 class="title">{{ name }}</h1>
       <div class="columns is-multiline">
+        <h1 class="column is-narrow title is-uppercase">
+          {{ name }}
+        </h1>
         <TechCard v-for="tech in techs" :key="tech.id"
           :id="tech.id" :tech="tech" :highlight="highlight(tech)">
         </TechCard>
@@ -36,5 +38,9 @@ export default class Era extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.title {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
 
 </style>
