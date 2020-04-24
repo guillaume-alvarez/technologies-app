@@ -1,9 +1,9 @@
 <template>
   <div id="board">
       <Summary name="Future" :techs="playerTechs"/>
-      <Era name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
-      <Era name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
-      <Era name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
+      <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
+      <CardsRow name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
+      <CardsRow name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
-import Era from './Era.vue';
+import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
 import {
   Technology,
@@ -22,7 +22,7 @@ import {
 
 @Component({
   components: {
-    Era,
+    CardsRow,
     Summary,
   },
 })

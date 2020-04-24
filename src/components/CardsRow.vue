@@ -1,5 +1,5 @@
 <template>
-  <div class="era">
+  <div class="cards-row">
     <section class="section">
       <div class="columns is-multiline">
         <h1 class="column is-narrow title is-uppercase">
@@ -23,7 +23,7 @@ import { Technology } from '../model/technology';
     TechCard,
   },
 })
-export default class Era extends Vue {
+export default class CardsRow extends Vue {
   @Prop() private name!: string;
 
   @Prop() private techs!: Array<Technology>;
@@ -43,4 +43,8 @@ export default class Era extends Vue {
   text-orientation: upright;
 }
 
+.cards-row {
+  border: thin outset black;
+  border-style: solid none;
+}
 </style>
