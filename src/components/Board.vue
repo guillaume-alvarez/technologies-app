@@ -101,7 +101,7 @@ export default class Board extends Vue {
     c = Board.compareEffect('social', a, b);
     if (c !== 0) return c;
 
-    c = Board.compareEffect('tech', a, b);
+    c = Board.compareEffect('science', a, b);
     if (c !== 0) return c;
 
     c = Board.compareEffect('strength', a, b);

@@ -1,6 +1,6 @@
 <template>
-  <figure class="image is-32x32 effect">
-    <img :src="getIconPath" :title="tooltip">
+  <figure class="image is-32x32 effect" :title="tooltip">
+    <img :src="getIconPath">
     <p class="effect-value">{{ value }}</p>
   </figure>
 </template>
@@ -24,7 +24,7 @@ export default class EffectIcon extends Vue {
       case 'strength': return icons('./swords.svg');
       case 'food': return icons('./wheat.svg');
       case 'social': return icons('./village.svg');
-      case 'tech': return icons('./enlightenment.svg');
+      case 'science': return icons('./enlightenment.svg');
       default: return '';
     }
   }

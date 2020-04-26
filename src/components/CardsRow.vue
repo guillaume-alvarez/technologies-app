@@ -1,15 +1,13 @@
 <template>
   <div class="cards-row">
-    <section class="section">
-      <div class="columns is-multiline">
-        <h1 class="column is-narrow title is-uppercase">
-          {{ name }}
-        </h1>
-        <TechCard v-for="tech in techs" :key="tech.id"
-          :id="tech.id" :tech="tech" :highlight="highlight(tech)">
-        </TechCard>
-      </div>
-    </section>
+    <div class="columns is-multiline">
+      <h1 class="column is-narrow title is-uppercase">
+        {{ name }}
+      </h1>
+      <TechCard v-for="tech in techs" :key="tech.id"
+        :id="tech.id" :tech="tech" :highlight="highlight(tech)">
+      </TechCard>
+    </div>
   </div>
 </template>
 
@@ -46,5 +44,6 @@ export default class CardsRow extends Vue {
 .cards-row {
   border: thin outset black;
   border-style: solid none;
+  padding: 1em;
 }
 </style>

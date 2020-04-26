@@ -6,10 +6,10 @@ export interface Effects {
   prod?: number;
   social?: number;
   strength?: number;
-  tech?: number;
+  science?: number;
 }
 
-export const EFFECTS_NAMES: Array<keyof Effects> = ['food', 'prod', 'social', 'strength', 'tech'];
+export const EFFECTS_NAMES: Array<keyof Effects> = ['food', 'prod', 'social', 'strength', 'science'];
 
 interface TechnologyData {
   id: string;
@@ -40,6 +40,8 @@ export class Technology {
 
   era: Era;
 
+  cost: number;
+
   constructor(id: string, name: string, root: boolean, effects: Effects, text: string, era: Era,
     previous: Array<Technology>, help: Array<Technology>) {
     this.id = id;
@@ -50,6 +52,7 @@ export class Technology {
     this.help = help;
     this.text = text;
     this.era = era;
+    this.cost = 2 * era.id + 1;
   }
 }
 

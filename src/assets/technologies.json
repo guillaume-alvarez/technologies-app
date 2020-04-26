@@ -21,7 +21,7 @@
     "root" : true,
     "text" : "Wheat\nBarley\nSorghum\nStones\nCopper\nGold",
     "effects" : {
-      "tech" : 1,
+      "science" : 1,
       "prod" : 1,
       "food" : 1
     },
@@ -36,7 +36,7 @@
     "root" : true,
     "text" : "Shaman\nSpirits\nRituals",
     "effects" : {
-      "tech" : 1,
+      "science" : 1,
       "social" : 1
     },
     "previous" : [ ],
@@ -180,7 +180,7 @@
     "root" : true,
     "text" : "Stick\nHammer",
     "effects" : {
-      "tech" : 1,
+      "science" : 1,
       "prod" : 2
     },
     "previous" : [ ],

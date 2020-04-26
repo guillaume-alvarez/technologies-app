@@ -1,7 +1,8 @@
 <template>
   <div class="summary level">
     <div class="level-item" v-for="tmp of effects" :key="tmp.name">
-      <EffectIcon :name="tmp.name" :value="'+' + tmp.value" :tooltip="tmp.sources.join('\n')"/>
+      <EffectIcon :name="tmp.name" :value="'+' + tmp.value"
+        :tooltip="'Gain +' + tmp.value + ' science:\n' + tmp.sources.join('\n')"/>
     </div>
   </div>
 </template>

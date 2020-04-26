@@ -21,6 +21,18 @@
             {{ text }}
           </div>
         </div>
+        <ul class="card-footer">
+          <li v-for="previous in tech.previous" :key="previous.id"
+            class="card-footer-item card-header-title">
+            =>{{ previous.name }}
+          </li>
+          <li key="cost" class="card-footer-item">
+            Cost
+            <EffectIcon name="science"
+              :value="'-' + tech.cost"
+              :tooltip="'Costs ' + tech.cost + ' science'"/>
+          </li>
+        </ul>
       </div>
     </div>
   </CardMove>
@@ -52,18 +64,6 @@ export default class TechCard extends Vue {
     return this.tech.id;
   }
 
-  getIconPath = function getIconPath(effect: keyof Effects): string {
-    const icons = require.context('../assets/icons/', false, /\.svg$/);
-    switch (effect) {
-      case 'prod': return icons('./tools.svg');
-      case 'strength': return icons('./swords.svg');
-      case 'food': return icons('./wheat.svg');
-      case 'social': return icons('./village.svg');
-      case 'tech': return icons('./enlightenment.svg');
-      default: return '';
-    }
-  }
-
   onClick() {
     bus.$emit('select-tech', this.tech);
   }
@@ -83,6 +83,7 @@ export default class TechCard extends Vue {
 .card {
   min-width: 10em;
   background-image: url("../assets/parch-texture.png");
+  font-size: smaller;
 
   /* strong shadow */
   box-shadow: 1em 1em 2em -0.125em rgba(10, 10, 10, 0.5), 0 0px 0 1px rgba(10, 10, 10, 0.02);
@@ -137,5 +138,10 @@ export default class TechCard extends Vue {
 
 .highlight {
   box-shadow: 0 0 1em yellow inset, 0 0 1em yellow;
+}
+
+.card-footer-item {
+  /** minimal padding for readability */
+  padding: 0.1em;
 }
 </style>
