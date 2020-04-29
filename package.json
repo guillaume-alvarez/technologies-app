@@ -10,6 +10,9 @@
   "dependencies": {
     "bulma": "^0.8.2",
     "core-js": "^3.6.4",
+    "honeycomb-grid": "^3.1.5",
+    "pixi-viewport": "^4.11.1",
+    "pixi.js": "^5.2.3",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1"
@@ -43,7 +46,12 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "max-classes-per-file": [
+        "error",
+        2
+      ]
+    }
   },
   "browserslist": [
     "> 1%",

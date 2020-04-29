@@ -1,6 +1,6 @@
 <template>
-  <div class="summary level">
-    <div class="level-item" v-for="tmp of effects" :key="tmp.name">
+  <div class="summary columns">
+    <div class="column" v-for="tmp of effects" :key="tmp.name">
       <EffectIcon :name="tmp.name" :value="'+' + tmp.value"
         :tooltip="'Gain +' + tmp.value + ' science:\n' + tmp.sources.join('\n')"/>
     </div>
@@ -61,5 +61,6 @@ export default class Summary extends Vue {
 <style scoped>
 .summary {
   padding: 1em;
+  max-width: 100em;
 }
 </style>

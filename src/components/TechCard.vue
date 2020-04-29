@@ -84,6 +84,7 @@ export default class TechCard extends Vue {
   min-width: 10em;
   background-image: url("../assets/parch-texture.png");
   font-size: smaller;
+  cursor: grab;
 
   /* strong shadow */
   box-shadow: 1em 1em 2em -0.125em rgba(10, 10, 10, 0.5), 0 0px 0 1px rgba(10, 10, 10, 0.02);

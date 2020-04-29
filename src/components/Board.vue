@@ -1,7 +1,14 @@
 <template>
   <div id="board">
-      <Summary name="Future" :techs="playerTechs"/>
       <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
+      <div class="columns">
+        <div class="column">
+          <Summary :techs="playerTechs"/>
+        </div>
+        <div class="column">
+          <TileMap :map="map"/>
+        </div>
+      </div>
       <CardsRow name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
       <CardsRow name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
   </div>
@@ -13,6 +20,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
 import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
+import TileMap from './TileMap.vue';
+
+import { grid } from '../model/map';
 import {
   Technology,
   Effects,
@@ -24,9 +34,12 @@ import {
   components: {
     CardsRow,
     Summary,
+    TileMap,
   },
 })
 export default class Board extends Vue {
+  private map = grid;
+
   private highlightedTechs = new Array<Technology>();
 
   private pastTechs = new Array<Technology>();
