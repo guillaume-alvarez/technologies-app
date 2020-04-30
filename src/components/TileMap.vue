@@ -1,24 +1,39 @@
 <template>
-  <div id="map">
+  <div id="tile-map">
+    <div id="map">
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Grid, Hex } from 'honeycomb-grid';
+import { Hex } from 'honeycomb-grid';
 import * as PIXI from 'pixi.js';
 import { Viewport } from 'pixi-viewport';
 import { bus } from '../main';
 import {
-  Terrain, playerHex, toHex,
-  HEX_HEIGHT, HEX_WIDTH,
+  Terrain, playerHex, toHex, grid, discoverHex, Tile,
 } from '../model/map';
 
 @Component
 export default class TileMap extends Vue {
-  @Prop() private map!: Grid;
+  static createTextures() {
+    const tiles = require.context('../assets/tiles/', false);
+    const textures = new Map<Terrain, PIXI.Texture>();
+    textures.set(Terrain.UNKNOWN, PIXI.Texture.from(tiles('./hex_blank.png')));
+    textures.set(Terrain.DESERT, PIXI.Texture.from(tiles('./hex_desert.png')));
+    textures.set(Terrain.GRASS, PIXI.Texture.from(tiles('./hex_grassland.png')));
+    textures.set(Terrain.HILLS, PIXI.Texture.from(tiles('./hex_hills.png')));
+    textures.set(Terrain.MOUNTAIN, PIXI.Texture.from(tiles('./hex_mountain.png')));
+    textures.set(Terrain.SEA, PIXI.Texture.from(tiles('./hex_sea.png')));
+    textures.set(Terrain.FOREST, PIXI.Texture.from(tiles('./hex_forest.png')));
+    textures.set(Terrain.CITY, PIXI.Texture.from(tiles('./hex_arctic.png')));
+    return textures;
+  }
 
-  private textures = new Map<Terrain, PIXI.Texture>();
+  private textures = TileMap.createTextures();
+
+  private viewport?: Viewport;
 
   mounted() {
     const app = new PIXI.Application({
@@ -29,64 +44,48 @@ export default class TileMap extends Vue {
     });
     this.$el.appendChild(app.view);
 
-    const tiles = require.context('../assets/tiles/', false);
-    this.textures.set(Terrain.UNKNOWN, PIXI.Texture.from(tiles('./hex_blank.png')));
-    this.textures.set(Terrain.GRASS, PIXI.Texture.from(tiles('./hex_grassland.png')));
-    this.textures.set(Terrain.HILLS, PIXI.Texture.from(tiles('./hex_hills.png')));
-    this.textures.set(Terrain.MOUNTAIN, PIXI.Texture.from(tiles('./hex_mountain.png')));
-    this.textures.set(Terrain.SEA, PIXI.Texture.from(tiles('./hex_sea.png')));
-    this.textures.set(Terrain.FOREST, PIXI.Texture.from(tiles('./hex_forest.png')));
-    this.textures.set(Terrain.CITY, PIXI.Texture.from(tiles('./hex_arctic.png')));
-
-    const bottomHex = this.map[this.map.length - 1].toPoint();
-    const viewport = new Viewport({
+    this.viewport = new Viewport({
       screenWidth: app.renderer.screen.width,
       screenHeight: app.renderer.screen.height,
-      worldWidth: bottomHex.x + HEX_WIDTH,
-      worldHeight: bottomHex.y + HEX_HEIGHT,
+      worldHeight: grid.pointHeight(),
+      worldWidth: grid.pointWidth(),
       interaction: app.renderer.plugins.interaction,
     });
     // add the viewport to the stage
-    app.stage.addChild(viewport);
+    app.stage.addChild(this.viewport);
     // activate plugins
-    viewport
+    this.viewport
       .drag()
       .pinch()
       .clamp({ direction: 'all' })
       .on('clicked', (data) => this.click(data.world.x, data.world.y));
 
-    this.map.forEach((hex: any) => {
-      const sprite = new PIXI.Sprite(this.textures.get(hex.terrain));
-      const p = hex.toPoint();
-      sprite.x = p.x;
-      sprite.y = p.y;
-      viewport.addChild(sprite);
-    });
+    grid.forEach(this.setTerrain);
 
     const p = playerHex.toPoint();
-    viewport.moveCenter(new PIXI.Point(p.x, p.y));
+    this.viewport.moveCenter(new PIXI.Point(p.x, p.y));
+  }
+
+  setTerrain(hex: Hex<Tile>) {
+    const sprite = new PIXI.Sprite(this.textures.get(hex.terrain));
+    const p = hex.toPoint();
+    hex.setSprite(sprite);
+    sprite.x = p.x;
+    sprite.y = p.y;
+    this.viewport!.addChild(sprite);
   }
 
   click(x: number, y: number): void {
-    const hex: Hex<any> | undefined = this.map.get(toHex(x, y).coordinates());
-    console.log('Select %s from [%s, %s]', hex, x, y);
+    const hex = grid.get(toHex(x, y).coordinates());
     if (hex) {
-      bus.$emit('select-tile', hex);
-      console.log('Select %s at [%s, %s]', TileMap.getTerrainName(hex.terrain), hex.coordinates().x, hex.coordinates().y);
-    }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  static getTerrainName(terrain: Terrain): string {
-    switch (terrain) {
-      case Terrain.GRASS: return 'Grass';
-      case Terrain.HILLS: return 'Hills';
-      case Terrain.MOUNTAIN: return 'Mountain';
-      case Terrain.SEA: return 'Sea';
-      case Terrain.FOREST: return 'Forest';
-      case Terrain.CITY: return 'City';
-      case Terrain.UNKNOWN: return 'Unknown';
-      default: return 'Unknown';
+      if (hex.terrain === Terrain.UNKNOWN) {
+        // discover the terrain
+        discoverHex(hex);
+        // and display the new one
+        const sprite = hex.sprite as PIXI.Sprite;
+        this.viewport!.removeChild(sprite);
+        this.setTerrain(hex);
+      }
     }
   }
 }

@@ -6,7 +6,7 @@
           <Summary :techs="playerTechs"/>
         </div>
         <div class="column">
-          <TileMap :map="map"/>
+          <TileMap/>
         </div>
       </div>
       <CardsRow name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
@@ -22,7 +22,6 @@ import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
 import TileMap from './TileMap.vue';
 
-import { grid } from '../model/map';
 import {
   Technology,
   Effects,
@@ -38,8 +37,6 @@ import {
   },
 })
 export default class Board extends Vue {
-  private map = grid;
-
   private highlightedTechs = new Array<Technology>();
 
   private pastTechs = new Array<Technology>();
