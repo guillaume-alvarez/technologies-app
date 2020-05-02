@@ -128,12 +128,14 @@ export default class TileMap extends Vue {
   click(x: number, y: number): void {
     const hex = grid.get(toHex(x, y).coordinates());
     if (hex) {
-      if (hex.terrain === Terrain.UNKNOWN) {
-        // discover the terrain
-        discoverHex(hex);
-        // and display the new one
-        const sprite = hex.sprite as PIXI.Sprite;
-        sprite.texture = this.textures.get(hex.terrain)!;
+      if (!hex.isDiscovered()) {
+        if (grid.neighborsOf(hex).some((neighbor) => neighbor.isDiscovered())) {
+          // discover the terrain
+          discoverHex(hex);
+          // and display the new one
+          const sprite = hex.sprite as PIXI.Sprite;
+          sprite.texture = this.textures.get(hex.terrain)!;
+        }
       } else if (!hex.settled) {
         // only settle contiguous tiles
         if (grid.neighborsOf(hex).some((neighbor) => neighbor.settled)) {

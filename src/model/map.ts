@@ -32,6 +32,7 @@ export interface Tile {
   sprite: any;
   setSprite(sprite: any): void;
   settled: boolean;
+  isDiscovered(): boolean;
 }
 
 const Hex = Honeycomb.extendHex({
@@ -42,6 +43,10 @@ const Hex = Honeycomb.extendHex({
   setSprite(sprite: any) {
     this.sprite = sprite;
   },
+  isDiscovered() {
+    return this.terrain !== Terrain.UNKNOWN;
+  },
+
   settled: false,
 });
 const Grid = Honeycomb.defineGrid(Hex);
@@ -66,7 +71,7 @@ initTerrains();
 export function discoverHex(hex: Honeycomb.Hex<Tile>) {
   let terrains = shuffle(DEFAULT_TERRAIN_ODDS);
   grid.neighborsOf(hex).forEach((h) => {
-    if (h.terrain !== Terrain.UNKNOWN) {
+    if (h.isDiscovered()) {
       // remove a random default terrain from start (from 8, no risk to lose all)
       terrains.splice(0, 1);
       // add a neighbor terrain at end to increase its odds
