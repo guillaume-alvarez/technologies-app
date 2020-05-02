@@ -12,7 +12,7 @@
           <div class="card-header-icon">
             <span class="era" :title="tech.era.name">{{ tech.era.roman }}</span>
             <EffectIcon v-for="(value, name) in tech.effects" :key="name"
-              :name="name" :value="'+' + value" :tooltip="'+' + value + ' ' + name"
+              :type="name" :value="'+' + value" :tooltip="'+' + value + ' ' + name"
             />
           </div>
         </header>
@@ -28,7 +28,7 @@
           </li>
           <li key="cost" class="card-footer-item">
             Cost
-            <EffectIcon name="science"
+            <EffectIcon type="science"
               :value="'-' + tech.cost"
               :tooltip="'Costs ' + tech.cost + ' science'"/>
           </li>
