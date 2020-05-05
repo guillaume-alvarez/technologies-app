@@ -14,23 +14,10 @@ import { bus } from '../main';
 import { Terrain, Tile } from '../model/map';
 import { state } from '../model/store';
 
+
 @Component
 export default class TileMap extends Vue {
-  static createTextures() {
-    const tiles = require.context('../assets/tiles/', false);
-    const textures = new Map<Terrain, PIXI.Texture>();
-    textures.set(Terrain.UNKNOWN, PIXI.Texture.from(tiles('./hex_blank.png')));
-    textures.set(Terrain.DESERT, PIXI.Texture.from(tiles('./hex_desert.png')));
-    textures.set(Terrain.GRASS, PIXI.Texture.from(tiles('./hex_grassland.png')));
-    textures.set(Terrain.HILLS, PIXI.Texture.from(tiles('./hex_hills.png')));
-    textures.set(Terrain.MOUNTAIN, PIXI.Texture.from(tiles('./hex_mountain.png')));
-    textures.set(Terrain.SEA, PIXI.Texture.from(tiles('./hex_sea.png')));
-    textures.set(Terrain.FOREST, PIXI.Texture.from(tiles('./hex_forest.png')));
-    textures.set(Terrain.CITY, PIXI.Texture.from(tiles('./hex_arctic.png')));
-    return textures;
-  }
-
-  private textures = TileMap.createTextures();
+  private textures = new Map<Terrain, PIXI.Texture>();
 
   private viewport?: Viewport;
 
@@ -62,15 +49,34 @@ export default class TileMap extends Vue {
       .clamp({ direction: 'all' })
       .on('clicked', (data) => this.click(data.world.x, data.world.y));
 
-    state.map.grid.forEach(this.setTerrain);
-
-    this.drawSettledTiles();
-
     const p = state.map.playerHex.toPoint();
     this.viewport.moveCenter(new PIXI.Point(p.x, p.y));
+
+    const assets = require.context('../assets/', false);
+    const tiles = require.context('../assets/tiles/', false);
+    const spritesheetData = tiles('./tiles_spritesheet.json');
+    PIXI.Loader.shared
+      .add('tiles_spritesheet', tiles('./tiles_spritesheet.png'))
+      .add(assets('./parch-texture.png'))
+      .load((loader, resources) => {
+        const sheet = new PIXI.Spritesheet(resources!.tiles_spritesheet!.texture!, spritesheetData);
+        sheet.parse(() => {
+          this.textures.set(Terrain.UNKNOWN, sheet.textures['hex_blank.png']);
+          this.textures.set(Terrain.DESERT, sheet.textures['hex_desert.png']);
+          this.textures.set(Terrain.GRASS, sheet.textures['hex_grassland.png']);
+          this.textures.set(Terrain.HILLS, sheet.textures['hex_hills.png']);
+          this.textures.set(Terrain.MOUNTAIN, sheet.textures['hex_mountain.png']);
+          this.textures.set(Terrain.SEA, sheet.textures['hex_sea.png']);
+          this.textures.set(Terrain.FOREST, sheet.textures['hex_forest.png']);
+          this.textures.set(Terrain.CITY, sheet.textures['hex_arctic.png']);
+
+          state.map.grid.forEach(this.setTerrain);
+          this.drawSettledTiles();
+        });
+      });
   }
 
-  setTerrain(hex: Tile) {
+  private setTerrain(hex: Tile) {
     const sprite = new PIXI.Sprite(this.textures.get(hex.terrain));
     const p = hex.toPoint();
     hex.setSprite(sprite);

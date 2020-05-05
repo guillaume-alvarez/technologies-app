@@ -19,7 +19,7 @@ export default class EffectIcon extends Vue {
   @Prop() private tooltip!: string;
 
   get getIconPath(): string {
-    const tiles = require.context('../assets/tiles/', false, /\.png$/);
+    const tiles = require.context('../assets/tiles/', false);
     const icons = require.context('../assets/icons/', false, /\.svg$/);
     switch (this.type) {
       case Terrain.UNKNOWN: return tiles('./hex_blank.png');
@@ -38,6 +38,13 @@ export default class EffectIcon extends Vue {
       default: return '';
     }
   }
+/*
+  updated() {
+    setInterval(() => {
+      this.changeColor = !this.changeColor;
+      //alert(this.changeColor);
+    }, 2000);
+  } */
 }
 </script>
 
@@ -53,5 +60,10 @@ export default class EffectIcon extends Vue {
   font-weight: bold;
   font-size: larger;
   color: black;
+  text-shadow:
+    -1px 0 rgba(255, 255, 255, 0.5),
+    0 1px rgba(255, 255, 255, 0.5),
+    1px 0 rgba(255, 255, 255, 0.5),
+    0 -1px rgba(255, 255, 255, 0.5);
 }
 </style>

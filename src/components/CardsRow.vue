@@ -42,8 +42,7 @@ export default class CardsRow extends Vue {
 }
 
 .cards-row {
-  border: thin outset black;
-  border-style: solid none;
+  border-bottom: thin outset black;
   padding: 1em;
 }
 </style>
