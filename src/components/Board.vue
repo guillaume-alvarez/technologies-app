@@ -1,16 +1,16 @@
 <template>
   <div id="board">
-      <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
-      <div class="columns">
-        <div class="column is-narrow">
-          <Summary :techs="playerTechs"/>
-        </div>
-        <div class="column">
-          <TileMap/>
-        </div>
+    <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
+    <div class="columns">
+      <div class="column is-narrow">
+        <Summary :techs="playerTechs"/>
+        <TileMap/>
       </div>
-      <CardsRow name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
-      <CardsRow name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
+      <div class="column">
+        <CardsRow name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
+        <CardsRow name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
+      </div>
+    </div>
   </div>
 </template>
 
