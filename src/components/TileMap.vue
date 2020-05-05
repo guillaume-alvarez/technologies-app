@@ -7,14 +7,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Hex, Point } from 'honeycomb-grid';
+import { Point } from 'honeycomb-grid';
 import * as PIXI from 'pixi.js';
 import { Viewport } from 'pixi-viewport';
 import { bus } from '../main';
-import {
-  Terrain, playerHex, toHex, grid, Tile,
-  discoverHex, settleHex,
-} from '../model/map';
+import { Terrain, Tile } from '../model/map';
+import { state } from '../model/store';
 
 @Component
 export default class TileMap extends Vue {
@@ -39,6 +37,7 @@ export default class TileMap extends Vue {
   private borders?: PIXI.Graphics;
 
   mounted() {
+    console.log('Start PIXI rendering...');
     const app = new PIXI.Application({
       width: 400,
       height: 400,
@@ -50,8 +49,8 @@ export default class TileMap extends Vue {
     this.viewport = new Viewport({
       screenWidth: app.renderer.screen.width,
       screenHeight: app.renderer.screen.height,
-      worldWidth: grid.pointWidth(),
-      worldHeight: grid.pointHeight(),
+      worldWidth: state.map.pointWidth(),
+      worldHeight: state.map.pointHeight(),
       interaction: app.renderer.plugins.interaction,
     });
     // add the viewport to the stage
@@ -63,15 +62,15 @@ export default class TileMap extends Vue {
       .clamp({ direction: 'all' })
       .on('clicked', (data) => this.click(data.world.x, data.world.y));
 
-    grid.forEach(this.setTerrain);
+    state.map.grid.forEach(this.setTerrain);
 
     this.drawSettledTiles();
 
-    const p = playerHex.toPoint();
+    const p = state.map.playerHex.toPoint();
     this.viewport.moveCenter(new PIXI.Point(p.x, p.y));
   }
 
-  setTerrain(hex: Hex<Tile>) {
+  setTerrain(hex: Tile) {
     const sprite = new PIXI.Sprite(this.textures.get(hex.terrain));
     const p = hex.toPoint();
     hex.setSprite(sprite);
@@ -86,18 +85,6 @@ export default class TileMap extends Vue {
       this.viewport!.removeChild(this.borders);
     }
 
-    // collect settled hexagons
-    const settled = new Set<Hex<Tile>>();
-    const collectSettled = (hex: Hex<Tile>) => {
-      settled.add(hex);
-      grid.neighborsOf(hex).forEach((neighbor) => {
-        if (neighbor.settled && !settled.has(neighbor)) {
-          collectSettled(neighbor);
-        }
-      });
-    };
-    collectSettled(playerHex);
-
     // then draw borders with each hexagon that is not settled
     const borders = new PIXI.Graphics();
     // set a line style of 1px wide and color #999
@@ -106,16 +93,16 @@ export default class TileMap extends Vue {
       borders.moveTo(p1.x, p1.y);
       borders.lineTo(p2.x, p2.y);
     };
-    settled.forEach((hex) => {
+    state.map.settledTiles.forEach((hex) => {
       //  4_5
       // 3/ \0
       // 2\_/1
       const origin = hex.toPoint();
       const corners = hex.corners().map((corner) => corner.add(origin));
       // cannot use FlatCompassDirection values as the enum values are not transpiled by typescript
-      const neighbors = grid.neighborsOf(hex, [0, 1, 2, 3, 4, 5]);
+      const neighbors = state.map.grid.neighborsOf(hex, [0, 1, 2, 3, 4, 5]);
       for (let i = 0; i < 6; i += 1) {
-        if (neighbors[i] === undefined || !settled.has(neighbors[i])) {
+        if (neighbors[i] === undefined || !state.map.settledTiles.includes(neighbors[i])) {
           drawLine(corners[i], corners[(i + 1) % 6]);
         }
       }
@@ -126,23 +113,24 @@ export default class TileMap extends Vue {
   }
 
   click(x: number, y: number): void {
-    const hex = grid.get(toHex(x, y).coordinates());
+    const hex = state.map.grid.get(state.map.toHex(x, y).coordinates());
     if (hex) {
       if (!hex.isDiscovered()) {
-        if (grid.neighborsOf(hex).some((neighbor) => neighbor.isDiscovered())) {
+        if (state.map.grid.neighborsOf(hex).some((neighbor) => neighbor.isDiscovered())) {
           // discover the terrain
-          discoverHex(hex);
+          state.map.discoverHex(hex);
           // and display the new one
           const sprite = hex.sprite as PIXI.Sprite;
           sprite.texture = this.textures.get(hex.terrain)!;
         }
       } else if (!hex.settled) {
         // only settle contiguous tiles
-        if (grid.neighborsOf(hex).some((neighbor) => neighbor.settled)) {
+        if (state.map.grid.neighborsOf(hex).some((neighbor) => neighbor.settled)) {
           // change hex state
-          settleHex(hex);
+          state.map.settleHex(hex);
           // then re-draw the border
           this.drawSettledTiles();
+          bus.$emit('settle-tile', hex);
         }
       }
     }

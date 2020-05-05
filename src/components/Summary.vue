@@ -1,12 +1,16 @@
 <template>
-  <div class="summary columns">
-    <div class="column" v-for="tmp of effects" :key="tmp.name">
-      <EffectIcon :type="tmp.name" :value="'+' + tmp.value"
-        :tooltip="'Gain +' + tmp.value + ' ' + tmp.name + ':\n' + tmp.sources.join('\n')"/>
+  <div class="summary">
+    <div class="columns">
+      <div class="column" v-for="tmp of effects" :key="tmp.name">
+        <EffectIcon :type="tmp.name" :value="'+' + tmp.value"
+          :tooltip="'Gain +' + tmp.value + ' ' + tmp.name + ':\n' + tmp.sources.join('\n')"/>
+      </div>
     </div>
-    <div class="column" v-for="terrain of terrains" :key="terrain[0]">
-      <EffectIcon :type="terrain[0]" :value="terrain[1]"
-        :tooltip="'Settled ' + terrain[1] + ' ' + terrain[0] + ' tile(s)'"/>
+    <div class="columns">
+      <div class="column" v-for="terrain of terrains()" :key="terrain[0]">
+        <EffectIcon :type="terrain[0]" :value="terrain[1]"
+          :tooltip="'Settled ' + terrain[1] + ' ' + terrain[0] + ' tile(s)'"/>
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +21,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
 import EffectIcon from './EffectIcon.vue';
 import { Technology, Effects, EFFECTS_NAMES } from '../model/technology';
-import { Terrain, grid } from '../model/map';
+import { Terrain } from '../model/map';
+import { state } from '../model/store';
 
 class TmpEffect {
   name!: keyof Effects;
@@ -61,7 +66,7 @@ export default class Summary extends Vue {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  get terrains() {
+  public terrains() {
     const terrains = new Map<Terrain, number>();
     // eslint-disable-next-line no-restricted-syntax
     Object.keys(Terrain).forEach((k) => {
@@ -71,7 +76,7 @@ export default class Summary extends Vue {
       }
     });
     // now compute number of tiles
-    grid.filter((hex) => hex.settled).forEach((hex) => {
+    state.map.settledTiles.forEach((hex) => {
       let nb = terrains.get(hex.terrain) || 0;
       nb += 1;
       terrains.set(hex.terrain, nb);

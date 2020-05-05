@@ -2,7 +2,7 @@
   <div id="board">
       <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
       <div class="columns">
-        <div class="column">
+        <div class="column is-narrow">
           <Summary :techs="playerTechs"/>
         </div>
         <div class="column">
@@ -21,6 +21,8 @@ import { bus } from '../main';
 import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
 import TileMap from './TileMap.vue';
+import { Terrain, Tile } from '../model/map';
+import { state } from '../model/store';
 
 import {
   Technology,
@@ -68,6 +70,9 @@ export default class Board extends Vue {
     bus.$on('hover-tech', (...args: any[]) => {
       const [tech, hover] = args;
       this.onHoverTech(tech, hover);
+    });
+    bus.$on('settle-tile', (hex: Tile) => {
+      this.onSettleTile(hex);
     });
   }
 
@@ -155,6 +160,11 @@ export default class Board extends Vue {
     } else {
       this.highlightedTechs = [];
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  onSettleTile(hex: Tile) {
+    // this.settledTiles.push(hex.terrain);
   }
 }
 </script>

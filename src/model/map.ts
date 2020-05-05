@@ -1,6 +1,11 @@
 /* eslint max-classes-per-file: ["error", 2] */
 /* eslint no-param-reassign: ["error", { "props": false }] */
-import * as Honeycomb from 'honeycomb-grid';
+/* eslint object-shorthand: "warn" */
+/* eslint class-methods-use-this: "warn" */
+import {
+  Grid, Hex, GridFactory,
+  defineGrid, extendHex,
+} from 'honeycomb-grid';
 import { shuffle } from '../utils';
 
 export enum Terrain {
@@ -22,7 +27,7 @@ const DEFAULT_TERRAIN_ODDS = [
 const HEX_HEIGHT = 38;
 const HEX_WIDTH = 45;
 
-export interface Tile {
+export interface TileData {
   size: {
     height: number;
     width: number;
@@ -35,56 +40,80 @@ export interface Tile {
   isDiscovered(): boolean;
 }
 
-const Hex = Honeycomb.extendHex({
-  size: { height: HEX_HEIGHT, width: HEX_WIDTH },
-  orientation: 'flat',
-  terrain: Terrain.UNKNOWN, // unknown by default
-  sprite: {},
-  setSprite(sprite: any) {
-    this.sprite = sprite;
-  },
-  isDiscovered() {
-    return this.terrain !== Terrain.UNKNOWN;
-  },
+export type Tile = Hex<TileData>;
 
-  settled: false,
-});
-const Grid = Honeycomb.defineGrid(Hex);
-export const grid = Grid.rectangle({ width: 50, height: 50 });
+export class WorldMap {
+  public grid!: Grid<Tile>;
 
-export function toHex(x: number, y: number) {
-  return Grid.pointToHex(x, y);
-}
+  public playerHex!: Tile;
 
-// fill center of the grid
-export const playerHex = grid.get({ x: 25, y: 25 })!;
-playerHex.settled = true;
-function initTerrains() {
-  playerHex.terrain = Terrain.CITY;
-  const terrains = shuffle(DEFAULT_TERRAIN_ODDS);
-  grid.neighborsOf(playerHex).forEach((hex) => {
+  private GridF!: GridFactory<Tile>;
+
+  private settled = new Array<Tile>();
+
+  constructor(width: number, height: number) {
+    const HexF = extendHex({
+      size: { height: HEX_HEIGHT, width: HEX_WIDTH },
+      orientation: 'flat',
+      terrain: Terrain.UNKNOWN, // unknown by default
+      sprite: {},
+      setSprite(sprite: any) {
+        this.sprite = sprite;
+      },
+      settled: false,
+      isDiscovered() {
+        return this.terrain !== Terrain.UNKNOWN;
+      },
+    });
+    this.GridF = defineGrid(HexF) as GridFactory<Tile>;
+    this.grid = this.GridF.rectangle({ width: width, height: width });
+    this.playerHex = this.grid.get({ x: width / 2, y: height / 2 })!;
+    this.settleHex(this.playerHex);
+
+    this.playerHex.terrain = Terrain.CITY;
+    const terrains = shuffle(DEFAULT_TERRAIN_ODDS);
+    this.grid.neighborsOf(this.playerHex).forEach((hex) => {
+      hex.terrain = terrains.pop()!;
+    });
+  }
+
+  public toHex(x: number, y: number): Tile {
+    return this.GridF.pointToHex(x, y);
+  }
+
+  public discoverHex(hex: Tile) {
+    let terrains = shuffle(DEFAULT_TERRAIN_ODDS);
+    this.grid.neighborsOf(hex).forEach((h) => {
+      if (h.isDiscovered()) {
+        // remove a random default terrain from start (from 8, no risk to lose all)
+        terrains.splice(0, 1);
+        // add a neighbor terrain at end to increase its odds
+        terrains.push(h.terrain);
+      }
+    });
+    // reshuffle and pick
+    terrains = shuffle(terrains);
     hex.terrain = terrains.pop()!;
-  });
-}
-initTerrains();
+    console.log('Discovered %s hex [%s, %s]', hex.terrain, hex.coordinates().x, hex.coordinates().y);
+  }
 
-export function discoverHex(hex: Honeycomb.Hex<Tile>) {
-  let terrains = shuffle(DEFAULT_TERRAIN_ODDS);
-  grid.neighborsOf(hex).forEach((h) => {
-    if (h.isDiscovered()) {
-      // remove a random default terrain from start (from 8, no risk to lose all)
-      terrains.splice(0, 1);
-      // add a neighbor terrain at end to increase its odds
-      terrains.push(h.terrain);
+  public settleHex(hex: Tile) {
+    if (!this.settled.includes(hex)) {
+      hex.settled = true;
+      console.log('Settled %s hex [%s, %s]', hex.terrain, hex.coordinates().x, hex.coordinates().y);
+      this.settled.push(hex);
     }
-  });
-  // reshuffle and pick
-  terrains = shuffle(terrains);
-  hex.terrain = terrains.pop()!;
-  console.log('Discovered %s hex [%s, %s]', hex.terrain, hex.coordinates().x, hex.coordinates().y);
-}
+  }
 
-export function settleHex(hex: Honeycomb.Hex<Tile>) {
-  hex.settled = true;
-  console.log('Settled %s hex [%s, %s]', hex.terrain, hex.coordinates().x, hex.coordinates().y);
+  public pointWidth() {
+    return this.grid.pointWidth();
+  }
+
+  public pointHeight() {
+    return this.grid.pointHeight();
+  }
+
+  get settledTiles() {
+    return this.settled;
+  }
 }
