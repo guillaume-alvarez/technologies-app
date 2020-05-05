@@ -52,6 +52,8 @@ class TmpEffect {
 export default class Summary extends Vue {
   @Prop() private techs!: Array<Technology>;
 
+  private settledTiles = state.map.settledTiles;
+
   get effects() {
     const effects = new Map<keyof Effects, TmpEffect>();
     EFFECTS_NAMES.forEach((name) => {
@@ -66,7 +68,7 @@ export default class Summary extends Vue {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  public terrains() {
+  terrains() {
     const terrains = new Map<Terrain, number>();
     // eslint-disable-next-line no-restricted-syntax
     Object.keys(Terrain).forEach((k) => {
@@ -76,7 +78,7 @@ export default class Summary extends Vue {
       }
     });
     // now compute number of tiles
-    state.map.settledTiles.forEach((hex) => {
+    this.settledTiles.forEach((hex) => {
       let nb = terrains.get(hex.terrain) || 0;
       nb += 1;
       terrains.set(hex.terrain, nb);
