@@ -130,7 +130,7 @@ export default class TileMap extends Vue {
         // only settle contiguous tiles
         if (state.map.grid.neighborsOf(hex).some((neighbor) => neighbor.settled)) {
           // change hex state
-          state.map.settleHex(hex);
+          state.settleTile(hex);
           // then re-draw the border
           drawSettledTiles();
           bus.$emit('settle-tile', hex);

@@ -76,9 +76,6 @@ export default class Board extends Vue {
       const [tech, hover] = args;
       this.onHoverTech(tech, hover);
     });
-    bus.$on('settle-tile', (hex: Tile) => {
-      this.onSettleTile(hex);
-    });
   }
 
   static removeTech(array: Array<Technology>, tech: Technology): boolean {
@@ -165,11 +162,6 @@ export default class Board extends Vue {
     } else {
       this.highlightedTechs = [];
     }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  onSettleTile(hex: Tile) {
-    // this.settledTiles.push(hex.terrain);
   }
 }
 </script>

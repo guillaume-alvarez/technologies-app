@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="columns">
-      <div class="column" v-for="terrain of terrains()" :key="terrain[0]">
+      <div class="column" v-for="terrain of settledTerrains" :key="terrain[0]">
         <EffectIcon :type="terrain[0]" :value="terrain[1]"
           :tooltip="'Settled ' + terrain[1] + ' ' + terrain[0] + ' tile(s)'"/>
       </div>
@@ -52,7 +52,7 @@ class TmpEffect {
 export default class Summary extends Vue {
   @Prop() private techs!: Array<Technology>;
 
-  private settledTiles = state.map.settledTiles;
+  private settledTiles = state.settledTerrains;
 
   get effects() {
     const effects = new Map<keyof Effects, TmpEffect>();
@@ -65,25 +65,6 @@ export default class Summary extends Vue {
       });
     });
     return Array.from(effects.values());
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  terrains() {
-    const terrains = new Map<Terrain, number>();
-    // eslint-disable-next-line no-restricted-syntax
-    Object.keys(Terrain).forEach((k) => {
-      const terrain = Terrain[k as keyof typeof Terrain];
-      if (terrain !== Terrain.UNKNOWN) {
-        terrains.set(terrain, 0);
-      }
-    });
-    // now compute number of tiles
-    this.settledTiles.forEach((hex) => {
-      let nb = terrains.get(hex.terrain) || 0;
-      nb += 1;
-      terrains.set(hex.terrain, nb);
-    });
-    return terrains;
   }
 }
 </script>
