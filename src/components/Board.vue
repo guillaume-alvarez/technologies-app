@@ -1,5 +1,6 @@
 <template>
   <div id="board">
+    <MessageBanner title="TECHNOLOGIES" :message="message"/>
     <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
     <div class="columns">
       <div class="column is-narrow">
@@ -21,6 +22,7 @@ import { bus } from '../main';
 import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
 import TileMap from './TileMap.vue';
+import MessageBanner from './MessageBanner.vue';
 import { Terrain, Tile } from '../model/map';
 import { state } from '../model/store';
 
@@ -36,6 +38,7 @@ import {
     CardsRow,
     Summary,
     TileMap,
+    MessageBanner,
   },
 })
 export default class Board extends Vue {
@@ -45,6 +48,8 @@ export default class Board extends Vue {
 
   private presentTechs: Array<Technology>
    = technologies.filter((tech) => tech.root).sort(Board.compareTech).reverse();
+
+  private message = 'Pick a technology you can pay for, or explore the map...';
 
   get playerTechs(): Array<Technology> {
     return [...this.presentTechs, ...this.pastTechs];
