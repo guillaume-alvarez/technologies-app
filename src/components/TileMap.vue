@@ -86,7 +86,10 @@ export default class TileMap extends Vue {
       .on('clicked', (data) => this.click(data.world.x, data.world.y));
 
     const p = map.playerHex.toPoint();
-    viewport.moveCenter(new PIXI.Point(p.x, p.y));
+    viewport.moveCenter(new PIXI.Point(
+      p.x + map.playerHex.width() / 2,
+      p.y + map.playerHex.height() / 2,
+    ));
 
     const tiles = require.context('../assets/tiles/', false);
     const spritesheetData = tiles('./tiles_spritesheet.json');
