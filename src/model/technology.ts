@@ -24,52 +24,82 @@ interface TechnologyData {
 }
 
 export class Technology {
-  id: string;
+  readonly id: string;
 
-  name: string;
+  readonly name: string;
 
-  root: boolean;
+  readonly root: boolean;
 
-  effects: Effects;
+  readonly effects: Effects;
 
-  previous: Array<Technology>;
+  readonly previous: Array<Technology>;
 
-  help: Array<Technology>;
+  readonly help: Array<Technology>;
 
-  text: string;
+  readonly era: Era;
 
-  era: Era;
+  readonly cost: number;
 
-  cost: number;
+  readonly innovations: Array<Innovation>;
 
-  constructor(id: string, name: string, root: boolean, effects: Effects, text: string, era: Era,
-    previous: Array<Technology>, help: Array<Technology>) {
+  constructor(id: string, name: string, root: boolean, effects: Effects, era: Era,
+    previous: Array<Technology>, help: Array<Technology>, innovations: Array<Innovation>) {
     this.id = id;
     this.name = name;
     this.root = root;
     this.effects = effects;
     this.previous = previous;
     this.help = help;
-    this.text = text;
     this.era = era;
     this.cost = 2 * era.id + 1;
+    this.innovations = innovations;
+  }
+}
+
+/**
+ * Specific use case of a braoder technology, like cows for domestication technology.
+ */
+export class Innovation {
+  id: string;
+
+  name: string;
+
+  effects: Effects;
+
+  era: Era;
+
+  constructor(id: string, name: string, effects: Effects, era: Era) {
+    this.id = id;
+    this.name = name;
+    this.effects = effects;
+    this.era = era;
   }
 }
 
 const dataMap: Record<string, TechnologyData> = data;
-const map = new Map<string, Technology>();
+const techsMap = new Map<string, Technology>();
+const innovMap = new Map<string, Innovation>();
 export const technologies = new Array<Technology>();
+export const innovations = new Array<Innovation>();
 Object.keys(dataMap).forEach((id) => {
   const t = dataMap[id];
-  const tech = new Technology(t.id, t.name, t.root, t.effects, t.text, getEra(t.era),
-    t.previous.map((pid) => map.get(pid)!),
-    t.help.map((hid) => map.get(hid)!));
-  map.set(id, tech);
+  const era = getEra(t.era);
+  const innovs = t.text.split('\n').map((s) => {
+    if (!innovMap.has(s)) {
+      innovMap.set(s, new Innovation(s, s, {}, era));
+    }
+    return innovMap.get(s)!;
+  });
+  const tech = new Technology(t.id, t.name, t.root, t.effects, era,
+    t.previous.map((pid) => techsMap.get(pid)!),
+    t.help.map((hid) => techsMap.get(hid)!),
+    innovs);
+  techsMap.set(id, tech);
   technologies.push(tech);
 });
 
 export function getTechnology(id: string) {
-  return map.get(id);
+  return techsMap.get(id);
 }
 
 /**

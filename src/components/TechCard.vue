@@ -57,7 +57,7 @@ export default class TechCard extends Vue {
   @Prop() private highlight!: boolean;
 
   get text(): string {
-    return this.tech.text;
+    return ['Potential innovations:', ...this.tech.innovations.map((i) => i.name)].join('\n- ');
   }
 
   get id(): string {
