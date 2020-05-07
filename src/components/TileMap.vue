@@ -1,5 +1,5 @@
 <template>
-  <div id="tile-map">
+  <div class="tile-map">
     <div id="map">
     </div>
   </div>
@@ -37,6 +37,7 @@ const textures = new Map<Terrain, PIXI.Texture>();
 
 function setTerrain(hex: Tile) {
   const sprite = new PIXI.Sprite(textures.get(hex.terrain));
+  sprite.renderable = hex.isDiscovered();
   const p = hex.toPoint();
   hex.setSprite(sprite);
   sprite.x = p.x;
@@ -75,7 +76,7 @@ function drawSettledTiles() {
 @Component
 export default class TileMap extends Vue {
   mounted() {
-    this.$el.appendChild(app.view);
+    this.$el.querySelector('#map')!.appendChild(app.view);
     // add the viewport to the stage
     app.stage.addChild(viewport);
     // activate plugins
@@ -87,13 +88,11 @@ export default class TileMap extends Vue {
     const p = map.playerHex.toPoint();
     viewport.moveCenter(new PIXI.Point(p.x, p.y));
 
-    const assets = require.context('../assets/', false);
     const tiles = require.context('../assets/tiles/', false);
     const spritesheetData = tiles('./tiles_spritesheet.json');
     PIXI.Loader.shared.reset();
     PIXI.Loader.shared
       .add('tiles_spritesheet', tiles('./tiles_spritesheet.png'))
-      .add(assets('./parch-texture.png'))
       .load((loader, resources) => {
         const sheet = new PIXI.Spritesheet(resources!.tiles_spritesheet!.texture!, spritesheetData);
         sheet.parse(() => {
@@ -142,5 +141,8 @@ export default class TileMap extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.tile-map {
+  background-image: url("../assets/parch-texture.png");
+  border-radius: 0.5em; /* slightly round corner, like physical cards */
+}
 </style>
