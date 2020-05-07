@@ -12,7 +12,7 @@ import * as PIXI from 'pixi.js';
 import { Viewport } from 'pixi-viewport';
 import { bus } from '../main';
 import { Terrain, Tile } from '../model/map';
-import { state } from '../model/store';
+import { state, map } from '../model/store';
 
 // outside the component: should not be monitored
 console.log('Start PIXI rendering...');
@@ -26,8 +26,8 @@ const app = new PIXI.Application({
 const viewport = new Viewport({
   screenWidth: app.renderer.screen.width,
   screenHeight: app.renderer.screen.height,
-  worldWidth: state.map.pointWidth(),
-  worldHeight: state.map.pointHeight(),
+  worldWidth: map.pointWidth(),
+  worldHeight: map.pointHeight(),
   interaction: app.renderer.plugins.interaction,
 });
 
@@ -56,16 +56,16 @@ function drawSettledTiles() {
     borders.moveTo(p1.x, p1.y);
     borders.lineTo(p2.x, p2.y);
   };
-  state.map.settledTiles.forEach((hex) => {
+  map.settledTiles.forEach((hex) => {
     //  4_5
     // 3/ \0
     // 2\_/1
     const origin = hex.toPoint();
     const corners = hex.corners().map((corner) => corner.add(origin));
     // cannot use FlatCompassDirection values as the enum values are not transpiled by typescript
-    const neighbors = state.map.grid.neighborsOf(hex, [0, 1, 2, 3, 4, 5]);
+    const neighbors = map.grid.neighborsOf(hex, [0, 1, 2, 3, 4, 5]);
     for (let i = 0; i < 6; i += 1) {
-      if (neighbors[i] === undefined || !state.map.settledTiles.includes(neighbors[i])) {
+      if (neighbors[i] === undefined || !map.settledTiles.includes(neighbors[i])) {
         drawLine(corners[i], corners[(i + 1) % 6]);
       }
     }
@@ -84,7 +84,7 @@ export default class TileMap extends Vue {
       .clamp({ direction: 'all' })
       .on('clicked', (data) => this.click(data.world.x, data.world.y));
 
-    const p = state.map.playerHex.toPoint();
+    const p = map.playerHex.toPoint();
     viewport.moveCenter(new PIXI.Point(p.x, p.y));
 
     const assets = require.context('../assets/', false);
@@ -106,7 +106,7 @@ export default class TileMap extends Vue {
           textures.set(Terrain.FOREST, sheet.textures['hex_forest.png']);
           textures.set(Terrain.CITY, sheet.textures['hex_arctic.png']);
 
-          state.map.grid.forEach(setTerrain);
+          map.grid.forEach(setTerrain);
 
           viewport.addChild(borders);
           drawSettledTiles();
@@ -116,24 +116,23 @@ export default class TileMap extends Vue {
 
   // eslint-disable-next-line class-methods-use-this
   click(x: number, y: number): void {
-    const hex = state.map.grid.get(state.map.toHex(x, y).coordinates());
+    const hex = map.grid.get(map.toHex(x, y).coordinates());
     if (hex) {
       if (!hex.isDiscovered()) {
-        if (state.map.grid.neighborsOf(hex).some((neighbor) => neighbor.isDiscovered())) {
+        if (map.grid.neighborsOf(hex).some((neighbor) => neighbor.isDiscovered())) {
           // discover the terrain
-          state.map.discoverHex(hex);
+          map.discoverHex(hex);
           // and display the new one
           const sprite = hex.sprite as PIXI.Sprite;
           sprite.texture = textures.get(hex.terrain)!;
         }
       } else if (!hex.settled) {
         // only settle contiguous tiles
-        if (state.map.grid.neighborsOf(hex).some((neighbor) => neighbor.settled)) {
+        if (map.grid.neighborsOf(hex).some((neighbor) => neighbor.settled)) {
           // change hex state
           state.settleTile(hex);
           // then re-draw the border
           drawSettledTiles();
-          bus.$emit('settle-tile', hex);
         }
       }
     }

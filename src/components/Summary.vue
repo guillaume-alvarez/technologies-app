@@ -7,9 +7,9 @@
       </div>
     </div>
     <div class="columns">
-      <div class="column" v-for="terrain of settledTerrains" :key="terrain[0]">
-        <EffectIcon :type="terrain[0]" :value="terrain[1]"
-          :tooltip="'Settled ' + terrain[1] + ' ' + terrain[0] + ' tile(s)'"/>
+      <div class="column" v-for="[terrain, nb] of settledTerrains" :key="terrain">
+        <EffectIcon :type="terrain" :value="nb"
+          :tooltip="'Settled ' + nb + ' ' + terrain + ' tile(s)'"/>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
 import EffectIcon from './EffectIcon.vue';
 import { Technology, Effects, EFFECTS_NAMES } from '../model/technology';
-import { Terrain } from '../model/map';
+import { Terrain, Tile } from '../model/map';
 import { state } from '../model/store';
 
 class TmpEffect {
@@ -52,7 +52,14 @@ class TmpEffect {
 export default class Summary extends Vue {
   @Prop() private techs!: Array<Technology>;
 
-  private settledTiles = state.settledTerrains;
+  private settledTerrains = Summary.getSettledTerrainsArray();
+
+  created() {
+    bus.$on('settle-tile', (hex: Tile) => {
+      // re-compute the settled tiles as an array, monitored by vue
+      this.settledTerrains = Summary.getSettledTerrainsArray();
+    });
+  }
 
   get effects() {
     const effects = new Map<keyof Effects, TmpEffect>();
@@ -65,6 +72,14 @@ export default class Summary extends Vue {
       });
     });
     return Array.from(effects.values());
+  }
+
+  static getSettledTerrainsArray() {
+    const arr = new Array<[string, number]>();
+    state.settledTerrains.forEach((nb, terrain) => {
+      arr.push([terrain, nb]);
+    });
+    return arr;
   }
 }
 </script>

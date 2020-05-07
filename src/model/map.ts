@@ -9,14 +9,14 @@ import {
 import { shuffle } from '../utils';
 
 export enum Terrain {
-  UNKNOWN = 'Unknown',
-  GRASS = 'Grass',
-  HILLS = 'Hills',
-  MOUNTAIN = 'Mountain',
-  SEA = 'Sea',
-  FOREST = 'Forest',
-  DESERT = 'Desert',
-  CITY = 'City',
+  UNKNOWN = 'unknown',
+  GRASS = 'grass',
+  HILLS = 'hills',
+  MOUNTAIN = 'mountain',
+  SEA = 'sea',
+  FOREST = 'forest',
+  DESERT = 'desert',
+  CITY = 'city',
 }
 
 const DEFAULT_TERRAIN_ODDS = [
