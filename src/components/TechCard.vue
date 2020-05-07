@@ -1,17 +1,17 @@
 <template>
   <CardMove :duration="500">
-    <div class="tech column is-narrow" @click="onClick()">
+    <div class="tech-card column is-narrow" @click="onClick()">
       <div class="card"
         :class="highlight ? 'highlight' : ''"
         @mouseover="onMouseOver()"
         @mouseleave="onMouseLeave()">
         <header class="card-header">
           <p class="card-header-title">
-            {{ tech.name }}
+            {{ card.name }}
           </p>
           <div class="card-header-icon">
-            <span class="era" :title="tech.era.name">{{ tech.era.roman }}</span>
-            <EffectIcon v-for="(value, name) in tech.effects" :key="name"
+            <span class="era" :title="card.era.name">{{ card.era.roman }}</span>
+            <EffectIcon v-for="(value, name) in card.effects" :key="name"
               :type="name" :value="'+' + value" :tooltip="'+' + value + ' ' + name"
             />
           </div>
@@ -22,15 +22,15 @@
           </div>
         </div>
         <ul class="card-footer">
-          <li v-for="previous in tech.previous" :key="previous.id"
+          <li v-for="previous in card.previous" :key="previous.id"
             class="card-footer-item card-header-title">
             =>{{ previous.name }}
           </li>
           <li key="cost" class="card-footer-item">
             Cost
             <EffectIcon type="science"
-              :value="'-' + tech.cost"
-              :tooltip="'Costs ' + tech.cost + ' science'"/>
+              :value="'-' + card.cost"
+              :tooltip="'Costs ' + card.cost + ' science'"/>
           </li>
         </ul>
       </div>
@@ -43,7 +43,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
 import CardMove from './CardMove.vue';
 import EffectIcon from './EffectIcon.vue';
-import { Technology, Effects } from '../model/technology';
+import { Technology, Card, Innovation } from '../model/technology';
+import { state } from '../model/store';
 
 @Component({
   components: {
@@ -52,28 +53,34 @@ import { Technology, Effects } from '../model/technology';
   },
 })
 export default class TechCard extends Vue {
-  @Prop() private tech!: Technology;
+  @Prop() private card!: Card;
 
   @Prop() private highlight!: boolean;
 
   get text(): string {
-    return ['Potential innovations:', ...this.tech.innovations.map((i) => i.name)].join('\n- ');
+    if (this.card instanceof Technology) {
+      return ['Potential innovations:', ...this.card.innovations.map((i) => i.name)].join('\n- ');
+    }
+    if (this.card instanceof Innovation) {
+      return 'Innovation...';
+    }
+    return '';
   }
 
   get id(): string {
-    return this.tech.id;
+    return this.card.id;
   }
 
   onClick() {
-    bus.$emit('select-tech', this.tech);
+    state.selectCard(this.card);
   }
 
   onMouseOver() {
-    bus.$emit('hover-tech', this.tech, true);
+    bus.$emit('hover-card', this.card, true);
   }
 
   onMouseLeave() {
-    bus.$emit('hover-tech', this.tech, false);
+    bus.$emit('hover-card', this.card, false);
   }
 }
 </script>

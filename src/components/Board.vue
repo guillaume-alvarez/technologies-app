@@ -1,15 +1,15 @@
 <template>
   <div id="board">
     <MessageBanner title="TECHNOLOGIES" :message="message"/>
-    <CardsRow name="Future" :techs="futureTechs" :highlightedTechs="highlightedTechs"/>
+    <CardsRow name="Future" :cards="futureCards" :highlightedCards="highlightedCards"/>
     <div class="columns">
       <div class="column is-narrow">
-        <Summary :techs="playerTechs"/>
+        <Summary :cards="presentCards"/>
         <TileMap/>
       </div>
       <div class="column">
-        <CardsRow name="Present" :techs="presentTechs" :highlightedTechs="highlightedTechs"/>
-        <CardsRow name="Past" :techs="pastTechs" :highlightedTechs="highlightedTechs"/>
+        <CardsRow name="Present" :cards="presentCards" :highlightedCards="highlightedCards"/>
+        <CardsRow name="Past" :cards="pastCards" :highlightedCards="highlightedCards"/>
       </div>
     </div>
   </div>
@@ -23,15 +23,9 @@ import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
 import TileMap from './TileMap.vue';
 import MessageBanner from './MessageBanner.vue';
-import { Terrain, Tile } from '../model/map';
+import { Technology, Card, Effects } from '../model/technology';
 import { state } from '../model/store';
 
-import {
-  Technology,
-  Effects,
-  technologies,
-  includesPrevious,
-} from '../model/technology';
 
 @Component({
   components: {
@@ -42,40 +36,25 @@ import {
   },
 })
 export default class Board extends Vue {
-  private highlightedTechs = new Array<Technology>();
+  private highlightedCards = new Array<Card>();
 
-  private pastTechs = new Array<Technology>();
+  private pastCards = new Array<Card>();
 
-  private presentTechs: Array<Technology>
-   = technologies.filter((tech) => tech.root).sort(Board.compareTech).reverse();
+  private presentCards = new Array<Card>();
+
+  private futureCards = new Array<Card>();
 
   private message = 'Pick a technology you can pay for, or explore the map...';
 
-  get playerTechs(): Array<Technology> {
-    return [...this.presentTechs, ...this.pastTechs];
-  }
-
-  get futureTechs(): Array<Technology> {
-    return technologies
-      // tech not already discovered
-      .filter((tech) => !this.pastTechs.includes(tech))
-      .filter((tech) => !this.presentTechs.includes(tech))
-      // tech can be discovered
-      // eslint-disable-next-line max-len
-      .filter((tech) => includesPrevious(tech, this.pastTechs) || includesPrevious(tech, this.presentTechs))
-      // and sorted
-      .sort(Board.compareTech)
-      .reverse();
-  }
-
   created() {
-    bus.$on('select-tech', (tech: Technology) => {
-      this.onSelectTech(tech);
+    bus.$on('change-cards', () => {
+      this.recomputeCards();
     });
-    bus.$on('hover-tech', (...args: any[]) => {
+    bus.$on('hover-card', (...args: any[]) => {
       const [tech, hover] = args;
       this.onHoverTech(tech, hover);
     });
+    this.recomputeCards();
   }
 
   static removeTech(array: Array<Technology>, tech: Technology): boolean {
@@ -103,12 +82,12 @@ export default class Board extends Vue {
     return 0;
   }
 
-  static compareEffect(name: keyof Effects, a: Technology, b: Technology): number {
+  static compareEffect(name: keyof Effects, a: Card, b: Card): number {
     return Board.compareNumber(a.effects[name], b.effects[name]);
   }
 
   // food > prod > social > tech > strength
-  static compareTech(a: Technology, b: Technology): number {
+  static compareTech(a: Card, b: Card): number {
     let c = Board.compareEffect('food', a, b);
     if (c !== 0) return c;
 
@@ -127,40 +106,29 @@ export default class Board extends Vue {
     return a.name.localeCompare(b.name);
   }
 
-  private addPresentTech(tech: Technology): void {
-    this.presentTechs.push(tech);
-    this.presentTechs.sort(Board.compareTech).reverse();
-    // also push previous to past
-    tech.previous.forEach((previous) => {
-      if (Board.removeTech(this.presentTechs, previous)) {
-        this.addPastTech(previous);
-      }
-    });
-  }
-
-  private addPastTech(tech: Technology): void {
-    this.pastTechs.push(tech);
-    this.pastTechs.sort(Board.compareTech).reverse();
-  }
-
-  onSelectTech(tech: Technology): void {
-    if (Board.removeTech(this.futureTechs, tech)) {
-      this.addPresentTech(tech);
-    } else if (Board.removeTech(this.presentTechs, tech)) {
-      this.addPastTech(tech);
-    }
+  recomputeCards(): void {
+    this.presentCards = Array.from(state.presentCards.values())
+      .sort(Board.compareTech)
+      .reverse();
+    this.futureCards = Array.from(state.futureCards.values())
+      .sort(Board.compareTech)
+      .reverse();
+    this.pastCards = Array.from(state.pastCards.values())
+      .sort(Board.compareTech)
+      .reverse();
   }
 
   /** Highlight selected tech + previous + next */
   onHoverTech(tech: Technology, hover: boolean): void {
     if (hover) {
-      this.highlightedTechs = [
+      this.highlightedCards = [
         tech,
         ...tech.previous,
-        ...this.futureTechs.filter((t) => t.previous.includes(tech)),
+        ...tech.innovations,
+        ...this.futureCards.filter((t) => (t instanceof Technology && t.previous.includes(tech))),
       ];
     } else {
-      this.highlightedTechs = [];
+      this.highlightedCards = [];
     }
   }
 }

@@ -127,6 +127,7 @@ export default class TileMap extends Vue {
           // and display the new one
           const sprite = hex.sprite as PIXI.Sprite;
           sprite.texture = textures.get(hex.terrain)!;
+          sprite.renderable = true;
         }
       } else if (!hex.settled) {
         // only settle contiguous tiles

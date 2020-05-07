@@ -4,8 +4,8 @@
       <h1 class="column is-narrow title is-uppercase">
         {{ name }}
       </h1>
-      <TechCard v-for="tech in techs" :key="tech.id"
-        :id="tech.id" :tech="tech" :highlight="highlight(tech)">
+      <TechCard v-for="card in cards" :key="card.id"
+        :id="card.id" :card="card" :highlight="highlight(card)">
       </TechCard>
     </div>
   </div>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import TechCard from './TechCard.vue';
-import { Technology } from '../model/technology';
+import { Technology, Card } from '../model/technology';
 
 @Component({
   components: {
@@ -24,12 +24,12 @@ import { Technology } from '../model/technology';
 export default class CardsRow extends Vue {
   @Prop() private name!: string;
 
-  @Prop() private techs!: Array<Technology>;
+  @Prop() private cards!: Array<Card>;
 
-  @Prop() private highlightedTechs!: Array<Technology>;
+  @Prop() private highlightedCards!: Array<Card>;
 
-  highlight(tech: Technology): boolean {
-    return this.highlightedTechs.includes(tech);
+  highlight(card: Card): boolean {
+    return this.highlightedCards.includes(card);
   }
 }
 </script>

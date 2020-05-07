@@ -60,13 +60,13 @@ export class Technology {
  * Specific use case of a braoder technology, like cows for domestication technology.
  */
 export class Innovation {
-  id: string;
+  readonly id: string;
 
-  name: string;
+  readonly name: string;
 
-  effects: Effects;
+  readonly effects: Effects;
 
-  era: Era;
+  readonly era: Era;
 
   constructor(id: string, name: string, effects: Effects, era: Era) {
     this.id = id;
@@ -75,6 +75,8 @@ export class Innovation {
     this.era = era;
   }
 }
+
+export type Card = Technology | Innovation;
 
 const dataMap: Record<string, TechnologyData> = data;
 const techsMap = new Map<string, Technology>();
@@ -105,6 +107,14 @@ export function getTechnology(id: string) {
 /**
  * @returns true if all 'previous' for tech are in the array.
  */
-export function includesPrevious(tech: Technology, array: Array<Technology>): boolean {
-  return tech.previous.every((previous) => array.some((t) => t === previous));
+export function includesPrevious(card: Card, array: Array<Card>): boolean {
+  if (card instanceof Technology) {
+    return card.previous.every((previous) => array.some((t) => t === previous));
+  }
+  if (card instanceof Innovation) {
+    return array
+      .filter((c) => c instanceof Technology)
+      .some((t) => (t as Technology).innovations.includes(card));
+  }
+  return false;
 }

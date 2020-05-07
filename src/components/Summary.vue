@@ -20,7 +20,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { bus } from '../main';
 import EffectIcon from './EffectIcon.vue';
-import { Technology, Effects, EFFECTS_NAMES } from '../model/technology';
+import { Card, Effects, EFFECTS_NAMES } from '../model/technology';
 import { Terrain, Tile } from '../model/map';
 import { state } from '../model/store';
 
@@ -35,11 +35,11 @@ class TmpEffect {
     this.name = name;
   }
 
-  append(tech: Technology) {
-    const value = tech.effects[this.name];
+  append(card: Card) {
+    const value = card.effects[this.name];
     if (value) { // filter out 0 or undefined
       this.value += value;
-      this.sources.push(`+${value} from ${tech.name}`);
+      this.sources.push(`+${value} from ${card.name}`);
     }
   }
 }
@@ -50,7 +50,7 @@ class TmpEffect {
   },
 })
 export default class Summary extends Vue {
-  @Prop() private techs!: Array<Technology>;
+  @Prop() private cards!: Array<Card>;
 
   private settledTerrains = Summary.getSettledTerrainsArray();
 
@@ -66,9 +66,9 @@ export default class Summary extends Vue {
     EFFECTS_NAMES.forEach((name) => {
       effects.set(name, new TmpEffect(name));
     });
-    this.techs.forEach((tech) => {
+    this.cards.forEach((card) => {
       EFFECTS_NAMES.forEach((name) => {
-        effects.get(name)!.append(tech);
+        effects.get(name)!.append(card);
       });
     });
     return Array.from(effects.values());
