@@ -4,7 +4,7 @@ import {
   Card, Technology,
   technologies, includesPrevious, innovations,
 } from './technology';
-import { remove } from '../utils';
+import { remove, shuffle } from '../utils';
 
 
 const MAX_FUTURE_CARDS = 12;
@@ -50,7 +50,7 @@ export class GameState {
   }
 
   private updateFutureCards(nb: number) {
-    [...technologies, ...innovations]
+    const candidates = [...technologies, ...innovations]
       // tech not already discovered
       .filter((card) => !this.pastCards.has(card.id))
       .filter((card) => !this.presentCards.has(card.id))
@@ -58,7 +58,8 @@ export class GameState {
       // tech can be discovered
       // eslint-disable-next-line max-len
       .filter((card) => includesPrevious(card, Array.from(this.presentCards.values()))
-        || includesPrevious(card, Array.from(this.pastCards.values())))
+        || includesPrevious(card, Array.from(this.pastCards.values())));
+    shuffle(candidates)
       .sort((c1, c2) => c1.era.compareTo(c2.era))
       .slice(0, nb)
       .forEach((card) => this.futureCards.push(card));
