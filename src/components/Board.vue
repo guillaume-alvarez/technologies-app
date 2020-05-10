@@ -23,7 +23,10 @@ import CardsRow from './CardsRow.vue';
 import Summary from './Summary.vue';
 import TileMap from './TileMap.vue';
 import MessageBanner from './MessageBanner.vue';
-import { Technology, Card, Effects } from '../model/technology';
+import {
+  Technology, Card, Effects,
+  Innovation,
+} from '../model/technology';
 import { state } from '../model/store';
 
 
@@ -110,23 +113,36 @@ export default class Board extends Vue {
     this.presentCards = Array.from(state.presentCards.values())
       .sort(Board.compareTech)
       .reverse();
-    this.futureCards = Array.from(state.futureCards.values())
-      .sort(Board.compareTech)
-      .reverse();
     this.pastCards = Array.from(state.pastCards.values())
       .sort(Board.compareTech)
       .reverse();
+
+    // do not re-order them: keep the logical order they came in
+    this.futureCards = Array.from(state.futureCards);
   }
 
   /** Highlight selected tech + previous + next */
   onHoverTech(tech: Technology, hover: boolean): void {
     if (hover) {
-      this.highlightedCards = [
-        tech,
-        ...tech.previous,
-        ...tech.innovations,
-        ...this.futureCards.filter((t) => (t instanceof Technology && t.previous.includes(tech))),
-      ];
+      if (tech instanceof Technology) {
+        this.highlightedCards = [
+          tech,
+          ...tech.previous,
+          ...tech.innovations,
+          ...this.futureCards.filter((t) => (t instanceof Technology && t.previous.includes(tech))),
+        ];
+      }
+      if (tech instanceof Innovation) {
+        this.highlightedCards = [
+          tech,
+          ...this.futureCards
+            .filter((t) => (t instanceof Technology && t.innovations.includes(tech))),
+          ...this.presentCards
+            .filter((t) => (t instanceof Technology && t.innovations.includes(tech))),
+          ...this.pastCards
+            .filter((t) => (t instanceof Technology && t.innovations.includes(tech))),
+        ];
+      }
     } else {
       this.highlightedCards = [];
     }

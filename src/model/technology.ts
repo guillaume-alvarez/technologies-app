@@ -88,7 +88,9 @@ Object.keys(dataMap).forEach((id) => {
   const era = getEra(t.era);
   const innovs = t.text.split('\n').map((s) => {
     if (!innovMap.has(s)) {
-      innovMap.set(s, new Innovation(s, s, {}, era));
+      const innov = new Innovation(s, s, {}, era);
+      innovMap.set(s, innov);
+      innovations.push(innov);
     }
     return innovMap.get(s)!;
   });

@@ -14,3 +14,10 @@ export function shuffle<T>(array: Array<T>): Array<T> {
   }
   return ret;
 }
+
+export function remove<T>(array: Array<T>, item: T): boolean {
+  const index = array.indexOf(item);
+  if (index < 0) return false;
+  array.splice(index, 1);
+  return true;
+}

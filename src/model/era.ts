@@ -12,6 +12,15 @@ export class Era {
     this.id = id;
     this.roman = roman;
   }
+
+  /**
+   * An int value: 0 if the era is the same as the other era
+   * < 0 if the era is older than the other era
+   * > 0 if the era is more recent than the other era
+   */
+  public compareTo(era: Era): number {
+    return this.id - era.id;
+  }
 }
 
 function romanize(num: number): string {
@@ -33,10 +42,12 @@ function romanize(num: number): string {
 
 const erasById = new Map<number, Era>();
 const erasByName = new Map<string, Era>();
+export const eras = new Array<Era>();
 data.forEach((name: string, index: number) => {
   const era = new Era(name, index + 1, romanize(index + 1)); // array start at index 0
   erasById.set(era.id, era);
   erasByName.set(era.name, era);
+  eras.push(era);
 });
 
 export function getEra(id: number|string): Era {

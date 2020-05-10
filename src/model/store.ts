@@ -2,9 +2,12 @@ import { bus } from '../main';
 import { WorldMap, Tile, Terrain } from './map';
 import {
   Card, Technology,
-  technologies, includesPrevious,
+  technologies, includesPrevious, innovations,
 } from './technology';
+import { remove } from '../utils';
 
+
+const MAX_FUTURE_CARDS = 12;
 
 /**
  * Internal world map, used for display and internal logic.
@@ -20,7 +23,7 @@ export class GameState {
 
   public readonly presentCards = new Map<string, Card>();
 
-  public readonly futureCards = new Map<string, Card>();
+  public readonly futureCards = new Array<Card>();
 
   constructor() {
     Object.keys(Terrain).forEach((k) => {
@@ -43,19 +46,22 @@ export class GameState {
     technologies
       .filter((card) => card instanceof Technology && card.root)
       .forEach((tech) => this.presentCards.set(tech.id, tech));
-    this.updateFutureCards();
+    this.updateFutureCards(MAX_FUTURE_CARDS);
   }
 
-  private updateFutureCards() {
-    technologies
+  private updateFutureCards(nb: number) {
+    [...technologies, ...innovations]
       // tech not already discovered
-      .filter((tech) => !this.pastCards.has(tech.id))
-      .filter((tech) => !this.presentCards.has(tech.id))
+      .filter((card) => !this.pastCards.has(card.id))
+      .filter((card) => !this.presentCards.has(card.id))
+      .filter((card) => !this.futureCards.includes(card))
       // tech can be discovered
       // eslint-disable-next-line max-len
-      .filter((tech) => includesPrevious(tech, Array.from(this.presentCards.values()))
-        || includesPrevious(tech, Array.from(this.pastCards.values())))
-      .forEach((tech) => this.futureCards.set(tech.id, tech));
+      .filter((card) => includesPrevious(card, Array.from(this.presentCards.values()))
+        || includesPrevious(card, Array.from(this.pastCards.values())))
+      .sort((c1, c2) => c1.era.compareTo(c2.era))
+      .slice(0, nb)
+      .forEach((card) => this.futureCards.push(card));
   }
 
   public settleTile(hex: Tile) {
@@ -66,7 +72,7 @@ export class GameState {
   }
 
   public selectCard(card: Card): void {
-    if (this.futureCards.delete(card.id)) {
+    if (remove(this.futureCards, card)) {
       this.presentCards.set(card.id, card);
 
       // also push previous to past
@@ -79,8 +85,7 @@ export class GameState {
       }
 
       // and compute new futures cards
-      this.futureCards.clear();
-      this.updateFutureCards();
+      this.updateFutureCards(MAX_FUTURE_CARDS - this.futureCards.length);
     } else if (this.presentCards.delete(card.id)) {
       this.pastCards.set(card.id, card);
     }
