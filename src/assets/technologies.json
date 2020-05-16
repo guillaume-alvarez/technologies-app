@@ -33,7 +33,7 @@
     "id" : "Animism",
     "name" : "Animism",
     "rank" : 0,
-    "root" : true,
+    "root" : false,
     "text" : "Shaman\nSpirits\nRituals",
     "effects" : {
       "science" : 1,
@@ -99,7 +99,7 @@
     "id" : "Firewood",
     "name" : "Firewood",
     "rank" : 0,
-    "root" : true,
+    "root" : false,
     "text" : "Oak\nBirch\nPoplar",
     "effects" : {
       "prod" : 1
@@ -177,7 +177,7 @@
     "id" : "Tools",
     "name" : "Tools",
     "rank" : 0,
-    "root" : true,
+    "root" : false,
     "text" : "Stick\nHammer",
     "effects" : {
       "science" : 1,

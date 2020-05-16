@@ -5,6 +5,7 @@ import {
   technologies, includesPrevious, innovations,
 } from './technology';
 import { remove, shuffle } from '../utils';
+import { eras } from './era';
 
 
 const MAX_FUTURE_CARDS = 12;
@@ -58,7 +59,10 @@ export class GameState {
       // tech can be discovered
       // eslint-disable-next-line max-len
       .filter((card) => includesPrevious(card, Array.from(this.presentCards.values()))
-        || includesPrevious(card, Array.from(this.pastCards.values())));
+        || includesPrevious(card, Array.from(this.pastCards.values())))
+      .filter((card) => card instanceof Technology // always let player see the science cost
+        || !this.settledTerrains.has(card.cost)
+        || this.settledTerrains.get(card.cost)! > 0);
     shuffle(candidates)
       .sort((c1, c2) => c1.era.compareTo(c2.era))
       .slice(0, nb)
@@ -70,6 +74,13 @@ export class GameState {
     const nb = this.settledTerrains.get(hex.terrain) || 0;
     this.settledTerrains.set(hex.terrain, nb + 1);
     bus.$emit('settle-tile', hex); // let vue components change their state accordingly
+
+    // may allow more cards
+    const requiredCards = MAX_FUTURE_CARDS - this.futureCards.length;
+    if (requiredCards > 0) {
+      this.updateFutureCards(requiredCards);
+      bus.$emit('change-cards');
+    }
   }
 
   public selectCard(card: Card): void {

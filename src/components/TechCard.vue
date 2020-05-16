@@ -24,13 +24,19 @@
         <ul class="card-footer">
           <li v-for="previous in card.previous" :key="previous.id"
             class="card-footer-item card-header-title">
-            =>{{ previous.name }}
+            Replace<br/>
+            {{ previous.name }}
           </li>
           <li key="cost" class="card-footer-item">
             Cost
-            <EffectIcon type="science"
+            <EffectIcon v-if="isTechnology"
+              type="science"
               :value="'-' + card.cost"
               :tooltip="'Costs ' + card.cost + ' science'"/>
+            <EffectIcon v-if="isInnovation"
+              :type="card.cost"
+              :value="1"
+              :tooltip="'Costs 1 tile of ' + card.cost"/>
           </li>
         </ul>
       </div>
@@ -62,13 +68,21 @@ export default class TechCard extends Vue {
       return ['Potential innovations:', ...this.card.innovations.map((i) => i.name)].join('\n- ');
     }
     if (this.card instanceof Innovation) {
-      return 'Innovation...';
+      return ['Innovation for...', ...this.card.technologies.map((i) => i.name)].join('\n- ');
     }
     return '';
   }
 
   get id(): string {
     return this.card.id;
+  }
+
+  get isTechnology() {
+    return this.card instanceof Technology;
+  }
+
+  get isInnovation() {
+    return this.card instanceof Innovation;
   }
 
   onClick() {

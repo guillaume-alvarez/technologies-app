@@ -15,6 +15,13 @@ export function shuffle<T>(array: Array<T>): Array<T> {
   return ret;
 }
 
+/**
+ * Pick a random element of an array.
+ */
+export function random<T>(array: Array<T>): T {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 export function remove<T>(array: Array<T>, item: T): boolean {
   const index = array.indexOf(item);
   if (index < 0) return false;

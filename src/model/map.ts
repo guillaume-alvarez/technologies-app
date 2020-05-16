@@ -6,7 +6,7 @@ import {
   Grid, Hex, GridFactory,
   defineGrid, extendHex,
 } from 'honeycomb-grid';
-import { shuffle } from '../utils';
+import { shuffle, random } from '../utils';
 
 export enum Terrain {
   UNKNOWN = 'unknown',
@@ -23,6 +23,10 @@ const DEFAULT_TERRAIN_ODDS = [
   Terrain.GRASS, Terrain.GRASS, Terrain.FOREST, Terrain.FOREST,
   Terrain.MOUNTAIN, Terrain.HILLS, Terrain.DESERT, Terrain.SEA,
 ];
+
+export function randomTerrain() {
+  return random(DEFAULT_TERRAIN_ODDS);
+}
 
 const HEX_HEIGHT = 38;
 const HEX_WIDTH = 45;

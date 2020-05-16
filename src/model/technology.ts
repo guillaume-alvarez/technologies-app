@@ -1,5 +1,6 @@
 import data from '../assets/technologies.json';
 import { Era, getEra } from './era';
+import { Terrain, randomTerrain } from './map';
 
 export interface Effects {
   food?: number;
@@ -68,11 +69,16 @@ export class Innovation {
 
   readonly era: Era;
 
-  constructor(id: string, name: string, effects: Effects, era: Era) {
+  readonly cost: Terrain;
+
+  readonly technologies = new Array<Technology>();
+
+  constructor(id: string, name: string, effects: Effects, era: Era, cost: Terrain) {
     this.id = id;
     this.name = name;
     this.effects = effects;
     this.era = era;
+    this.cost = cost;
   }
 }
 
@@ -88,7 +94,7 @@ Object.keys(dataMap).forEach((id) => {
   const era = getEra(t.era);
   const innovs = t.text.split('\n').map((s) => {
     if (!innovMap.has(s)) {
-      const innov = new Innovation(s, s, {}, era);
+      const innov = new Innovation(s, s, {}, era, randomTerrain());
       innovMap.set(s, innov);
       innovations.push(innov);
     }
@@ -100,6 +106,7 @@ Object.keys(dataMap).forEach((id) => {
     innovs);
   techsMap.set(id, tech);
   technologies.push(tech);
+  tech.innovations.forEach((i) => i.technologies.push(tech));
 });
 
 export function getTechnology(id: string) {
