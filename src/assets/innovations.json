@@ -1,0 +1,968 @@
+[
+  {
+    "id" : "Mammoths",
+    "name" : "Mammoths",
+    "era" : "Stone Age",
+    "cost" : "forest",
+    "effects" : {
+      "prod" : 1,
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Aurochs",
+    "name" : "Aurochs",
+    "era" : "Stone Age",
+    "cost" : "forest",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Sheep",
+    "name" : "Sheep",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Wheat",
+    "name" : "Wheat",
+    "era" : "Stone Age",
+    "cost" : "forest",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Barley",
+    "name" : "Barley",
+    "era" : "Stone Age",
+    "cost" : "desert",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Sorghum",
+    "name" : "Sorghum",
+    "era" : "Stone Age",
+    "cost" : "desert",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Stones",
+    "name" : "Stones",
+    "era" : "Stone Age",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Copper",
+    "name" : "Copper",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Gold",
+    "name" : "Gold",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Shaman",
+    "name" : "Shaman",
+    "era" : "Stone Age",
+    "cost" : "hills",
+    "effects" : {
+      "science" : 1,
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Spirits",
+    "name" : "Spirits",
+    "era" : "Stone Age",
+    "cost" : "hills",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Rituals",
+    "name" : "Rituals",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Gods",
+    "name" : "Gods",
+    "era" : "Bronze Age",
+    "cost" : "forest",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Cults",
+    "name" : "Cults",
+    "era" : "Iron Age",
+    "cost" : "hills",
+    "effects" : {
+      "social" : 2
+    }
+  },
+  {
+    "id" : "Temple",
+    "name" : "Temple",
+    "era" : "Iron Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 2
+    }
+  },
+  {
+    "id" : "Clergy",
+    "name" : "Clergy",
+    "era" : "Iron Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 2
+    }
+  },
+  {
+    "id" : "God",
+    "name" : "God",
+    "era" : "Antiquity",
+    "cost" : "sea",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Saints",
+    "name" : "Saints",
+    "era" : "Antiquity",
+    "cost" : "forest",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Marturs",
+    "name" : "Marturs",
+    "era" : "Antiquity",
+    "cost" : "mountain",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Missionaries",
+    "name" : "Missionaries",
+    "era" : "Antiquity",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Nation",
+    "name" : "Nation",
+    "era" : "Industrial Age",
+    "cost" : "sea",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Leader",
+    "name" : "Leader",
+    "era" : "Industrial Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Soldiers",
+    "name" : "Soldiers",
+    "era" : "Industrial Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Oak",
+    "name" : "Oak",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Birch",
+    "name" : "Birch",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Poplar",
+    "name" : "Poplar",
+    "era" : "Stone Age",
+    "cost" : "forest",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Dog",
+    "name" : "Dog",
+    "era" : "Bronze Age",
+    "cost" : "grass",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Cat",
+    "name" : "Cat",
+    "era" : "Bronze Age",
+    "cost" : "desert",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Cow",
+    "name" : "Cow",
+    "era" : "Bronze Age",
+    "cost" : "hills",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Camel",
+    "name" : "Camel",
+    "era" : "Bronze Age",
+    "cost" : "hills",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Horse",
+    "name" : "Horse",
+    "era" : "Bronze Age",
+    "cost" : "sea",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Llama",
+    "name" : "Llama",
+    "era" : "Bronze Age",
+    "cost" : "mountain",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Goat",
+    "name" : "Goat",
+    "era" : "Bronze Age",
+    "cost" : "forest",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Stick",
+    "name" : "Stick",
+    "era" : "Stone Age",
+    "cost" : "sea",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Hammer",
+    "name" : "Hammer",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Cedar",
+    "name" : "Cedar",
+    "era" : "Bronze Age",
+    "cost" : "mountain",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Fir",
+    "name" : "Fir",
+    "era" : "Bronze Age",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Cherry",
+    "name" : "Cherry",
+    "era" : "Bronze Age",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Mapple",
+    "name" : "Mapple",
+    "era" : "Bronze Age",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Pine",
+    "name" : "Pine",
+    "era" : "Bronze Age",
+    "cost" : "sea",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Chestnut",
+    "name" : "Chestnut",
+    "era" : "Bronze Age",
+    "cost" : "desert",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Aspen",
+    "name" : "Aspen",
+    "era" : "Bronze Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Silver",
+    "name" : "Silver",
+    "era" : "Stone Age",
+    "cost" : "mountain",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Tin",
+    "name" : "Tin",
+    "era" : "Stone Age",
+    "cost" : "mountain",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Iron",
+    "name" : "Iron",
+    "era" : "Stone Age",
+    "cost" : "desert",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Lead",
+    "name" : "Lead",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Furnace",
+    "name" : "Furnace",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Arsenical Bronze",
+    "name" : "Arsenical Bronze",
+    "era" : "Bronze Age",
+    "cost" : "grass",
+    "effects" : {
+      "prod" : 2
+    }
+  },
+  {
+    "id" : "Club",
+    "name" : "Club",
+    "era" : "Bronze Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Javelin",
+    "name" : "Javelin",
+    "era" : "Bronze Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Spear",
+    "name" : "Spear",
+    "era" : "Bronze Age",
+    "cost" : "sea",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Knife",
+    "name" : "Knife",
+    "era" : "Bronze Age",
+    "cost" : "mountain",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Sword",
+    "name" : "Sword",
+    "era" : "Bronze Age",
+    "cost" : "forest",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Bow",
+    "name" : "Bow",
+    "era" : "Bronze Age",
+    "cost" : "mountain",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Arrows",
+    "name" : "Arrows",
+    "era" : "Bronze Age",
+    "cost" : "sea",
+    "effects" : {
+      "strength" : 1
+    }
+  },
+  {
+    "id" : "Dagger",
+    "name" : "Dagger",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Shield",
+    "name" : "Shield",
+    "era" : "Iron Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Scabbard",
+    "name" : "Scabbard",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Point",
+    "name" : "Point",
+    "era" : "Iron Age",
+    "cost" : "desert",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Edge",
+    "name" : "Edge",
+    "era" : "Iron Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Pommel",
+    "name" : "Pommel",
+    "era" : "Iron Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Hilt",
+    "name" : "Hilt",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Guard",
+    "name" : "Guard",
+    "era" : "Iron Age",
+    "cost" : "mountain",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Helmet",
+    "name" : "Helmet",
+    "era" : "Iron Age",
+    "cost" : "mountain",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Cuirasse",
+    "name" : "Cuirasse",
+    "era" : "Iron Age",
+    "cost" : "desert",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Leather",
+    "name" : "Leather",
+    "era" : "Iron Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Plates",
+    "name" : "Plates",
+    "era" : "Iron Age",
+    "cost" : "sea",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Chainmail",
+    "name" : "Chainmail",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "strength" : 2
+    }
+  },
+  {
+    "id" : "Bakelite",
+    "name" : "Bakelite",
+    "era" : "World Wars",
+    "cost" : "desert",
+    "effects" : {
+      "prod" : 7
+    }
+  },
+  {
+    "id" : "Nylon",
+    "name" : "Nylon",
+    "era" : "World Wars",
+    "cost" : "mountain",
+    "effects" : {
+      "prod" : 7
+    }
+  },
+  {
+    "id" : "Vinyl",
+    "name" : "Vinyl",
+    "era" : "World Wars",
+    "cost" : "forest",
+    "effects" : {
+      "prod" : 7
+    }
+  },
+  {
+    "id" : "Tents",
+    "name" : "Tents",
+    "era" : "Stone Age",
+    "cost" : "hills",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Strongman",
+    "name" : "Strongman",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Lineage",
+    "name" : "Lineage",
+    "era" : "Stone Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Kinship",
+    "name" : "Kinship",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Warriors",
+    "name" : "Warriors",
+    "era" : "Stone Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Family",
+    "name" : "Family",
+    "era" : "Bronze Age",
+    "cost" : "sea",
+    "effects" : {
+      "social" : 2
+    }
+  },
+  {
+    "id" : "Chief",
+    "name" : "Chief",
+    "era" : "Bronze Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 2
+    }
+  },
+  {
+    "id" : "King",
+    "name" : "King",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Minister",
+    "name" : "Minister",
+    "era" : "Antiquity",
+    "cost" : "sea",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Laws",
+    "name" : "Laws",
+    "era" : "Antiquity",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Priest",
+    "name" : "Priest",
+    "era" : "Dark Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Inquisition",
+    "name" : "Inquisition",
+    "era" : "Dark Age",
+    "cost" : "grass",
+    "effects" : {
+      "strength" : 1,
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Empire",
+    "name" : "Empire",
+    "era" : "Dark Age",
+    "cost" : "mountain",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Bureaucracy",
+    "name" : "Bureaucracy",
+    "era" : "Dark Age",
+    "cost" : "mountain",
+    "effects" : {
+      "social" : 5
+    }
+  },
+  {
+    "id" : "Porch",
+    "name" : "Porch",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Beams",
+    "name" : "Beams",
+    "era" : "Iron Age",
+    "cost" : "mountain",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Hut",
+    "name" : "Hut",
+    "era" : "Iron Age",
+    "cost" : "forest",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "House",
+    "name" : "House",
+    "era" : "Iron Age",
+    "cost" : "grass",
+    "effects" : {
+      "social" : 1
+    }
+  },
+  {
+    "id" : "Flint",
+    "name" : "Flint",
+    "era" : "Antiquity",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Limestone",
+    "name" : "Limestone",
+    "era" : "Antiquity",
+    "cost" : "mountain",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Granite",
+    "name" : "Granite",
+    "era" : "Antiquity",
+    "cost" : "sea",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Forum",
+    "name" : "Forum",
+    "era" : "Iron Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Template",
+    "name" : "Template",
+    "era" : "Iron Age",
+    "cost" : "desert",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Granary",
+    "name" : "Granary",
+    "era" : "Iron Age",
+    "cost" : "sea",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Citizens",
+    "name" : "Citizens",
+    "era" : "Iron Age",
+    "cost" : "hills",
+    "effects" : {
+      "social" : 3
+    }
+  },
+  {
+    "id" : "Parliament",
+    "name" : "Parliament",
+    "era" : "Antiquity",
+    "cost" : "hills",
+    "effects" : {
+      "social" : 4
+    }
+  },
+  {
+    "id" : "Cart",
+    "name" : "Cart",
+    "era" : "Stone Age",
+    "cost" : "forest",
+    "effects" : {
+      "prod" : 1
+    }
+  },
+  {
+    "id" : "Clay",
+    "name" : "Clay",
+    "era" : "Bronze Age",
+    "cost" : "forest",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Pots",
+    "name" : "Pots",
+    "era" : "Bronze Age",
+    "cost" : "desert",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Kiln",
+    "name" : "Kiln",
+    "era" : "Bronze Age",
+    "cost" : "hills",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Bricks",
+    "name" : "Bricks",
+    "era" : "Bronze Age",
+    "cost" : "sea",
+    "effects" : {
+      "food" : 1
+    }
+  },
+  {
+    "id" : "Jugs",
+    "name" : "Jugs",
+    "era" : "Iron Age",
+    "cost" : "sea",
+    "effects" : {
+      "food" : 2
+    }
+  },
+  {
+    "id" : "Bottles",
+    "name" : "Bottles",
+    "era" : "Iron Age",
+    "cost" : "mountain",
+    "effects" : {
+      "food" : 2
+    }
+  },
+  {
+    "id" : "Steam Engine",
+    "name" : "Steam Engine",
+    "era" : "Age of Enlightenment",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 3
+    }
+  },
+  {
+    "id" : "Bessemer Steel",
+    "name" : "Bessemer Steel",
+    "era" :   "Industrial Age",
+    "cost" : "hills",
+    "effects" : {
+      "prod" : 4
+    }
+  },
+  {
+    "id" : "Explosion Engine",
+    "name" : "Explosion Engine",
+    "era" :   "World Wars",
+    "cost" : "desert",
+    "effects" : {
+      "prod" : 4
+    }
+  }
+  ]

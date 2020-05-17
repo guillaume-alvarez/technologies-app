@@ -1,8 +1,9 @@
-import data from '../assets/technologies.json';
+import technologiesData from '../assets/technologies.json';
+import innovationsData from '../assets/innovations.json';
 import { Era, getEra } from './era';
 import { Terrain, randomTerrain } from './map';
 
-export interface Effects {
+export interface Effects extends Record<string, number | undefined> {
   food?: number;
   prod?: number;
   social?: number;
@@ -11,18 +12,6 @@ export interface Effects {
 }
 
 export const EFFECTS_NAMES: Array<keyof Effects> = ['food', 'prod', 'social', 'strength', 'science'];
-
-interface TechnologyData {
-  id: string;
-  name: string;
-  rank: number;
-  root: boolean;
-  effects: Effects;
-  previous: Array<string>;
-  help: Array<string>;
-  text: string;
-  era: number;
-}
 
 export class Technology {
   readonly id: string;
@@ -84,30 +73,30 @@ export class Innovation {
 
 export type Card = Technology | Innovation;
 
-const dataMap: Record<string, TechnologyData> = data;
+const innovMap = new Map<string, Innovation>(innovationsData.map((d) => [d.id,
+  new Innovation(d.id, d.name, d.effects, getEra(d.era), d.cost as Terrain),
+]));
+
 const techsMap = new Map<string, Technology>();
-const innovMap = new Map<string, Innovation>();
-export const technologies = new Array<Technology>();
-export const innovations = new Array<Innovation>();
-Object.keys(dataMap).forEach((id) => {
-  const t = dataMap[id];
+Object.values(technologiesData).forEach((t) => {
   const era = getEra(t.era);
   const innovs = t.text.split('\n').map((s) => {
-    if (!innovMap.has(s)) {
-      const innov = new Innovation(s, s, {}, era, randomTerrain());
-      innovMap.set(s, innov);
-      innovations.push(innov);
+    if (innovMap.has(s)) {
+      return innovMap.get(s)!;
     }
-    return innovMap.get(s)!;
+    console.warn('Cannot get innovation %s in %s', s, t.id);
+    return new Innovation(s, s, t.effects, era, randomTerrain());
   });
   const tech = new Technology(t.id, t.name, t.root, t.effects, era,
     t.previous.map((pid) => techsMap.get(pid)!),
     t.help.map((hid) => techsMap.get(hid)!),
     innovs);
-  techsMap.set(id, tech);
-  technologies.push(tech);
+  techsMap.set(t.id, tech);
   tech.innovations.forEach((i) => i.technologies.push(tech));
 });
+
+export const technologies = Array.from(techsMap.values());
+export const innovations = Array.from(innovMap.values());
 
 export function getTechnology(id: string) {
   return techsMap.get(id);

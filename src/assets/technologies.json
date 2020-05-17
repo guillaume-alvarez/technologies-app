@@ -244,7 +244,7 @@
     "name" : "Coal",
     "rank" : 1,
     "root" : false,
-    "text" : "",
+    "text" : "Steam Engine",
     "effects" : {
       "prod" : 3
     },
@@ -257,7 +257,7 @@
     "name" : "Steel",
     "rank" : 5,
     "root" : false,
-    "text" : "",
+    "text" : "Bessemer Steel",
     "effects" : {
       "prod" : 4
     },
@@ -270,7 +270,7 @@
     "name" : "Oil",
     "rank" : 2,
     "root" : false,
-    "text" : "",
+    "text" : "Explosion Engine",
     "effects" : {
       "prod" : 4
     },
