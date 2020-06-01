@@ -141,13 +141,13 @@ export class GameState {
   private obsoletePresentCard(card: Card) {
     if (this.presentCards.delete(card.id)) {
       this.pastCards.set(card.id, card);
-    }
 
-    this.gain.food -= card.effects.food || 0;
-    this.gain.prod -= card.effects.prod || 0;
-    this.gain.science -= card.effects.science || 0;
-    this.gain.social -= card.effects.social || 0;
-    this.gain.strength -= card.effects.strength || 0;
+      this.gain.food -= card.effects.food || 0;
+      this.gain.prod -= card.effects.prod || 0;
+      this.gain.science -= card.effects.science || 0;
+      this.gain.social -= card.effects.social || 0;
+      this.gain.strength -= card.effects.strength || 0;
+    }
   }
 }
 
