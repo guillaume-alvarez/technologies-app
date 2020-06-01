@@ -2,8 +2,8 @@
   <div class="summary">
     <div class="columns">
       <div class="column" v-for="(gain, name) in gain" :key="name">
-        <EffectIcon :type="name" :value="'+' + gain"
-          :tooltip="'Gain +' + gain + ' ' + name"/>
+        <EffectIcon :type="name" :value="current[name] + '+' + gain"
+          :tooltip="'Gain +' + gain + ' ' + name + ' when selecting a new card.'"/>
       </div>
     </div>
     <div class="columns">
@@ -33,6 +33,8 @@ export default class Summary extends Vue {
   private settledTerrains = Summary.getSettledTerrainsArray();
 
   private gain = state.gain;
+
+  private current = state.current;
 
   created() {
     bus.$on('settle-tile', (hex: Tile) => {

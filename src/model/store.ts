@@ -63,6 +63,7 @@ export class GameState {
     technologies
       .filter((card) => card instanceof Technology && card.root)
       .forEach((tech) => this.addPresentCard(tech));
+    this.accumulateResources(); // from initial cards
     this.updateFutureCards(MAX_FUTURE_CARDS);
   }
 
@@ -108,12 +109,23 @@ export class GameState {
         card.previous.forEach((previous) => this.obsoletePresentCard(previous));
       }
 
+      // and accumulate resources
+      this.accumulateResources();
+
       // and compute new futures cards
       this.updateFutureCards(MAX_FUTURE_CARDS - this.futureCards.length);
     } else if (this.presentCards.delete(card.id)) {
       this.pastCards.set(card.id, card);
     }
     bus.$emit('change-cards');
+  }
+
+  private accumulateResources() {
+    this.current.food += this.gain.food;
+    this.current.prod += this.gain.prod;
+    this.current.science += this.gain.science;
+    this.current.social += this.gain.social;
+    this.current.strength += this.gain.strength;
   }
 
   private addPresentCard(card: Card) {
