@@ -1,9 +1,9 @@
 <template>
   <div class="summary">
     <div class="columns">
-      <div class="column" v-for="tmp of effects" :key="tmp.name">
-        <EffectIcon :type="tmp.name" :value="'+' + tmp.value"
-          :tooltip="'Gain +' + tmp.value + ' ' + tmp.name + ':\n' + tmp.sources.join('\n')"/>
+      <div class="column" v-for="(gain, name) in gain" :key="name">
+        <EffectIcon :type="name" :value="'+' + gain"
+          :tooltip="'Gain +' + gain + ' ' + name"/>
       </div>
     </div>
     <div class="columns">
@@ -24,54 +24,21 @@ import { Card, Effects, EFFECTS_NAMES } from '../model/technology';
 import { Terrain, Tile } from '../model/map';
 import { state } from '../model/store';
 
-class TmpEffect {
-  name!: keyof Effects;
-
-  value = 0;
-
-  sources = new Array<string>();
-
-  constructor(name: keyof Effects) {
-    this.name = name;
-  }
-
-  append(card: Card) {
-    const value = card.effects[this.name];
-    if (value) { // filter out 0 or undefined
-      this.value += value;
-      this.sources.push(`+${value} from ${card.name}`);
-    }
-  }
-}
-
 @Component({
   components: {
     EffectIcon,
   },
 })
 export default class Summary extends Vue {
-  @Prop() private cards!: Array<Card>;
-
   private settledTerrains = Summary.getSettledTerrainsArray();
+
+  private gain = state.gain;
 
   created() {
     bus.$on('settle-tile', (hex: Tile) => {
       // re-compute the settled tiles as an array, monitored by vue
       this.settledTerrains = Summary.getSettledTerrainsArray();
     });
-  }
-
-  get effects() {
-    const effects = new Map<keyof Effects, TmpEffect>();
-    EFFECTS_NAMES.forEach((name) => {
-      effects.set(name, new TmpEffect(name));
-    });
-    this.cards.forEach((card) => {
-      EFFECTS_NAMES.forEach((name) => {
-        effects.get(name)!.append(card);
-      });
-    });
-    return Array.from(effects.values());
   }
 
   static getSettledTerrainsArray() {

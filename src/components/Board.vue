@@ -4,7 +4,7 @@
     <CardsRow name="Future" :cards="futureCards" :highlightedCards="highlightedCards"/>
     <div class="columns">
       <div class="column is-narrow">
-        <Summary :cards="presentCards"/>
+        <Summary/>
         <TileMap/>
       </div>
       <div class="column">

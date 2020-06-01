@@ -26,6 +26,22 @@ export class GameState {
 
   public readonly futureCards = new Array<Card>();
 
+  public readonly current = {
+    food: 0,
+    prod: 0,
+    social: 0,
+    strength: 0,
+    science: 0,
+  };
+
+  public readonly gain = {
+    food: 0,
+    prod: 0,
+    social: 0,
+    strength: 0,
+    science: 0,
+  };
+
   constructor() {
     Object.keys(Terrain).forEach((k) => {
       const terrain = Terrain[k as keyof typeof Terrain];
@@ -46,7 +62,7 @@ export class GameState {
     // init cards
     technologies
       .filter((card) => card instanceof Technology && card.root)
-      .forEach((tech) => this.presentCards.set(tech.id, tech));
+      .forEach((tech) => this.addPresentCard(tech));
     this.updateFutureCards(MAX_FUTURE_CARDS);
   }
 
@@ -85,15 +101,11 @@ export class GameState {
 
   public selectCard(card: Card): void {
     if (remove(this.futureCards, card)) {
-      this.presentCards.set(card.id, card);
+      this.addPresentCard(card);
 
       // also push previous to past
       if (card instanceof Technology) {
-        card.previous.forEach((previous) => {
-          if (this.presentCards.delete(previous.id)) {
-            this.pastCards.set(previous.id, previous);
-          }
-        });
+        card.previous.forEach((previous) => this.obsoletePresentCard(previous));
       }
 
       // and compute new futures cards
@@ -102,6 +114,28 @@ export class GameState {
       this.pastCards.set(card.id, card);
     }
     bus.$emit('change-cards');
+  }
+
+  private addPresentCard(card: Card) {
+    this.presentCards.set(card.id, card);
+
+    this.gain.food += card.effects.food || 0;
+    this.gain.prod += card.effects.prod || 0;
+    this.gain.science += card.effects.science || 0;
+    this.gain.social += card.effects.social || 0;
+    this.gain.strength += card.effects.strength || 0;
+  }
+
+  private obsoletePresentCard(card: Card) {
+    if (this.presentCards.delete(card.id)) {
+      this.pastCards.set(card.id, card);
+    }
+
+    this.gain.food -= card.effects.food || 0;
+    this.gain.prod -= card.effects.prod || 0;
+    this.gain.science -= card.effects.science || 0;
+    this.gain.social -= card.effects.social || 0;
+    this.gain.strength -= card.effects.strength || 0;
   }
 }
 
